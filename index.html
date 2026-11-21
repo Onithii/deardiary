@@ -251,24 +251,24 @@
 
     :root { --cotton-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='table' tableValues='0 .13'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
     .book-stage { perspective: 1600px; padding: 8px 0 4px; }
-    .open-book { position: relative; isolation: isolate; display: grid; grid-template-columns: 1fr 1fr; width: min(100%, 660px); aspect-ratio: 4 / 5; margin: 0 auto; transform-style: preserve-3d; }
+    .open-book { position: relative; isolation: isolate; display: grid; grid-template-columns: 1fr 1fr; width: min(100%, 580px); aspect-ratio: 7 / 8; margin: 0 auto; transform-style: preserve-3d; }
     .open-book::before { content: ""; position: absolute; z-index: -1; inset: -5px -7px -9px; border: 1px solid #6A2730; border-radius: 10px; background: linear-gradient(90deg, #4A0E19, #7E1E31 50%, #4A0E19); box-shadow: 0 12px 18px rgba(42, 16, 22, 0.2); }
-    .book-page { position: relative; min-width: 0; overflow: hidden; padding: 38px clamp(18px, 3.2vw, 36px); background-color: #FCF8EE; background-image: var(--cotton-grain), repeating-linear-gradient(0deg, rgba(126, 87, 47, 0.01) 0 1px, transparent 1px 5px), repeating-linear-gradient(90deg, rgba(126, 87, 47, 0.007) 0 1px, transparent 1px 6px), radial-gradient(ellipse at 48% 48%, rgba(255, 255, 255, 0.42), transparent 70%), linear-gradient(110deg, #F4E8C9, #FCF8EE 18%, #FCF8EE 88%, #E8D8B2); background-blend-mode: soft-light, multiply, multiply, normal, normal; border: 1px solid #D8C5A0; }
+    .book-page { position: relative; min-width: 0; overflow: hidden; padding: 30px clamp(16px, 2.4vw, 30px); background-color: #FCF8EE; background-image: var(--cotton-grain), repeating-linear-gradient(0deg, rgba(126, 87, 47, 0.01) 0 1px, transparent 1px 5px), repeating-linear-gradient(90deg, rgba(126, 87, 47, 0.007) 0 1px, transparent 1px 6px), radial-gradient(ellipse at 48% 48%, rgba(255, 255, 255, 0.42), transparent 70%), linear-gradient(110deg, #F4E8C9, #FCF8EE 18%, #FCF8EE 88%, #E8D8B2); background-blend-mode: soft-light, multiply, multiply, normal, normal; border: 1px solid #D8C5A0; }
     .left-page { border-radius: 9px 2px 2px 9px; box-shadow: -2px 0 0 #E8D9B9, -4px 1px 0 #CBB995, -6px 2px 0 #4A0E19, inset -18px 0 22px -20px rgba(42, 16, 22, 0.7); }
     .right-page { border-radius: 2px 9px 9px 2px; box-shadow: 2px 0 0 #E8D9B9, 4px 1px 0 #CBB995, 6px 2px 0 #4A0E19, inset 18px 0 22px -20px rgba(42, 16, 22, 0.7); }
     .open-book::after { content: ""; position: absolute; z-index: 3; pointer-events: none; top: 0; bottom: 0; left: 50%; width: 34px; transform: translateX(-50%); background: linear-gradient(90deg, transparent, rgba(42, 16, 22, 0.17) 26%, rgba(42, 16, 22, 0.07) 42%, rgba(255, 255, 255, 0.54) 50%, rgba(42, 16, 22, 0.09) 60%, rgba(42, 16, 22, 0.16) 76%, transparent); }
     .page-kicker { display: block; color: var(--burgundy-mid); font-size: 8px; font-weight: 600; letter-spacing: 0.13em; text-transform: uppercase; margin-bottom: 7px; }
     .page-title { display: block; font-family: var(--font-serif); font-size: clamp(17px, 1.9vw, 21px); line-height: 1.08; font-weight: 500; color: var(--burgundy-dark); margin-bottom: 7px; }
-    .journal-body { display: block; padding-bottom: 132px; color: var(--ink-muted); font-family: 'Caveat', cursive; font-size: 16px; line-height: 1.1; }
+    .journal-body { display: block; padding-bottom: 104px; color: var(--ink-muted); font-family: 'Caveat', cursive; font-size: 15px; line-height: 1.08; }
     .journal-body::after { content: ""; display: block; clear: both; }
-    .journal-copy { display: block; margin: 0 0 8px; }
+    .journal-copy { display: block; margin: 0 0 6px; }
     .journal-photo { position: relative; float: left; width: 40%; margin: 5px 12px 10px 2px; padding: 5px 5px 16px; background: #FFFEF8; border: 1px solid #8B755B; box-shadow: 0 3px 7px rgba(42, 16, 22, 0.2); transform: rotate(-2deg); }
     .journal-photo.photo-right { float: right; margin: 4px 2px 6px 10px; transform: rotate(2deg); }
-    .journal-photo img { display: block; width: 100%; height: 118px; object-fit: cover; filter: sepia(0.13) saturate(0.82) contrast(1.04); border: 1px solid rgba(74, 14, 25, 0.18); }
-    .journal-photo.memory-photo { position: absolute; z-index: 1; left: 42px; bottom: 56px; float: none; width: 94px; margin: 0; padding: 4px 4px 14px; transform: rotate(3deg); }
-    .journal-photo.memory-photo img { height: 62px; }
-    .page-face .journal-photo.memory-photo { left: 34px; bottom: 54px; width: 86px; }
-    .page-face .journal-photo.memory-photo img { height: 56px; }
+    .journal-photo img { display: block; width: 100%; height: 94px; object-fit: cover; filter: sepia(0.13) saturate(0.82) contrast(1.04); border: 1px solid rgba(74, 14, 25, 0.18); }
+    .journal-photo.memory-photo { position: absolute; z-index: 1; left: 36px; bottom: 48px; float: none; width: 86px; margin: 0; padding: 4px 4px 14px; transform: rotate(3deg); }
+    .journal-photo.memory-photo img { height: 54px; }
+    .page-face .journal-photo.memory-photo { left: 30px; bottom: 46px; width: 78px; }
+    .page-face .journal-photo.memory-photo img { height: 48px; }
     .journal-photo figcaption, .journal-photo .photo-caption { position: absolute; right: 4px; bottom: 2px; left: 4px; overflow: hidden; color: #70594B; font-family: var(--font-serif); font-size: 8px; font-style: italic; line-height: 1; text-align: center; white-space: nowrap; }
     .journal-photo::before { content: ""; position: absolute; z-index: 1; top: -5px; left: 23%; width: 25px; height: 7px; background: rgba(238, 208, 121, 0.82); box-shadow: 0 1px 2px rgba(42, 16, 22, 0.12); transform: rotate(-7deg); }
     .botanical-sticker { position: absolute; right: 16px; bottom: 42px; color: #7E1E31; opacity: 0.7; font-family: var(--font-serif); font-size: 23px; font-style: italic; transform: rotate(-18deg); }
@@ -277,10 +277,10 @@
     .book-leaf::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0; background: linear-gradient(90deg, rgba(42, 16, 22, 0.28), transparent 28%); transition: opacity 450ms ease; }
     .book-leaf.is-turned { transform: rotateY(-180deg); box-shadow: -6px 3px 5px rgba(42, 16, 22, 0.28); }
     .book-leaf.is-turned::after { opacity: 0.45; }
-    .page-face { position: absolute; inset: 0; padding: 38px clamp(18px, 3.2vw, 36px); overflow: hidden; backface-visibility: hidden; background-color: #FCF8EE; background-image: var(--cotton-grain), repeating-linear-gradient(0deg, rgba(126, 87, 47, 0.01) 0 1px, transparent 1px 5px), repeating-linear-gradient(90deg, rgba(126, 87, 47, 0.007) 0 1px, transparent 1px 6px), radial-gradient(ellipse at 48% 48%, rgba(255, 255, 255, 0.42), transparent 70%), linear-gradient(100deg, #E8D8B2, #FCF8EE 12%, #FCF8EE 88%, #F4E8C9); background-blend-mode: soft-light, multiply, multiply, normal, normal; border: 1px solid #D8C5A0; }
+    .page-face { position: absolute; inset: 0; padding: 30px clamp(16px, 2.4vw, 30px); overflow: hidden; backface-visibility: hidden; background-color: #FCF8EE; background-image: var(--cotton-grain), repeating-linear-gradient(0deg, rgba(126, 87, 47, 0.01) 0 1px, transparent 1px 5px), repeating-linear-gradient(90deg, rgba(126, 87, 47, 0.007) 0 1px, transparent 1px 6px), radial-gradient(ellipse at 48% 48%, rgba(255, 255, 255, 0.42), transparent 70%), linear-gradient(100deg, #E8D8B2, #FCF8EE 12%, #FCF8EE 88%, #F4E8C9); background-blend-mode: soft-light, multiply, multiply, normal, normal; border: 1px solid #D8C5A0; }
     .page-front { border-radius: 0 7px 7px 0; }
     .page-back { transform: rotateY(180deg); border-radius: 9px 2px 2px 9px; background-image: var(--cotton-grain), repeating-linear-gradient(0deg, rgba(126, 87, 47, 0.01) 0 1px, transparent 1px 5px), repeating-linear-gradient(90deg, rgba(126, 87, 47, 0.007) 0 1px, transparent 1px 6px), linear-gradient(260deg, #E8D8B2, #FCF8EE 12%, #FCF8EE 88%, #F4E8C9); background-blend-mode: soft-light, multiply, multiply, normal; }
-    .book-controls { display: flex; align-items: center; justify-content: space-between; gap: 16px; width: min(100%, 660px); margin: 12px auto 0; }
+    .book-controls { display: flex; align-items: center; justify-content: space-between; gap: 16px; width: min(100%, 580px); margin: 12px auto 0; }
     .book-status { color: var(--ink-muted); font-size: 13px; }
 
     .letter-preview { max-width: 580px; margin: 0 auto; }
@@ -333,17 +333,17 @@
     }
     @media (max-width: 560px) {
       .experience-stack { gap: 42px; }
-      .open-book { aspect-ratio: 2 / 3; }
-      .book-page, .page-face { padding: 26px 12px; }
-      .journal-body { padding-bottom: 18px; font-size: 12px; line-height: 1.06; }
+      .open-book { aspect-ratio: 3 / 4; }
+      .book-page, .page-face { padding: 22px 10px; }
+      .journal-body { padding-bottom: 12px; font-size: 12px; line-height: 1.04; }
       .book-page .journal-copy.continuation:nth-of-type(n+3) { display: none; }
       .page-face .journal-copy.continuation:nth-of-type(n+4) { display: none; }
       .journal-photo { width: 43%; margin-right: 7px; }
-      .journal-photo img { height: 72px; }
-      .journal-photo.memory-photo { left: 20px; bottom: 44px; width: 70px; }
-      .journal-photo.memory-photo img { height: 46px; }
-      .page-face .journal-photo.memory-photo { left: 16px; bottom: 42px; width: 66px; }
-      .page-face .journal-photo.memory-photo img { height: 42px; }
+      .journal-photo img { height: 62px; }
+      .journal-photo.memory-photo { left: 18px; bottom: 38px; width: 64px; }
+      .journal-photo.memory-photo img { height: 40px; }
+      .page-face .journal-photo.memory-photo { left: 14px; bottom: 36px; width: 60px; }
+      .page-face .journal-photo.memory-photo img { height: 38px; }
       .journal-photo.photo-right { margin-left: 7px; }
       .letter-preview .letter-panel { height: auto; min-height: 240px; padding: 20px 22px; }
       .letter-preview .letter-note { font-size: 15px; }
@@ -453,11 +453,10 @@
                     <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&amp;fit=crop&amp;w=320&amp;q=75" alt="Misty mountains reflected in a quiet lake" loading="lazy" />
                     <figcaption>By the old lake · October</figcaption>
                   </figure>
-                  <p class="journal-copy">The afternoon turned silver with rain. We found the little path by the lake, pockets full of chestnuts, and watched the clouds settle over the hills. I wish I could keep that hush pressed here between these pages.</p>
-                  <p class="journal-copy continuation">The air smelled of wet leaves and woodsmoke. You pointed out a heron standing perfectly still at the water's edge; neither of us spoke until it lifted its wings and disappeared into the mist.</p>
-                  <p class="journal-copy continuation">I tucked one copper leaf into my coat for the walk home. It is resting here now, beside the date, to remind me how lovely an unhurried day can be. I hope we find that same quiet again when the seasons turn.</p>
-                  <p class="journal-copy continuation">On our way back we stopped at the wooden bridge to watch the rain draw tiny rings across the water. I remember thinking that some afternoons ask only that we pay attention, and that this one deserved a place in the book.</p>
-                  <p class="journal-copy continuation">The path was muddy, our sleeves were damp, and we were both smiling by the time the lights of town appeared through the trees. I would gladly walk it all again.</p>
+                  <p class="journal-copy">The afternoon turned silver with rain. We found the little path by the lake, pockets full of chestnuts, and watched clouds settle over the hills. I wish I could keep that hush here between these pages.</p>
+                  <p class="journal-copy continuation">Wet leaves and woodsmoke filled the air. We watched a heron lift from the water's edge and vanish into the mist.</p>
+                  <p class="journal-copy continuation">I tucked a copper leaf into my coat for the walk home. It rests here beside the date, a small promise to find this quiet again.</p>
+                  <p class="journal-copy continuation">By the old bridge, rain made rings on the water. Our sleeves were damp, our pockets full, and we were both smiling all the way home.</p>
                 </div>
                 <figure class="journal-photo memory-photo">
                   <img src="https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&amp;fit=crop&amp;w=240&amp;q=70" alt="Last golden light across a quiet autumn field" loading="lazy" />
@@ -474,11 +473,10 @@
                     <img src="https://images.unsplash.com/photo-1445116572660-236099ec97a0?auto=format&amp;fit=crop&amp;w=320&amp;q=75" alt="A softly lit cafe table on a rainy afternoon" loading="lazy" />
                     <figcaption>Tea, then another · 4:18</figcaption>
                   </figure>
-                  <p class="journal-copy">Back home, the kettle sang while the last leaves tapped at the window. You read aloud from the book on the table; I made a note of the line, though I think I liked the sound of your voice best.</p>
-                  <p class="journal-copy continuation">We stayed long after the tea had gone cold, trading old stories and making plans we may never need to keep. The lamplight gathered softly around us as evening settled in.</p>
-                  <p class="journal-copy continuation">Somewhere in the margin, I wrote: this is enough. A warm room, your familiar laugh, and nowhere else we need to be. I want to remember how the whole day seemed to exhale.</p>
-                  <p class="journal-copy continuation">Afterward we moved the teapot to the windowsill and listened to the rain ease into a fine mist. You traced a small heart in the steam on the glass, then laughed when it vanished.</p>
-                  <p class="journal-copy continuation">Perhaps this is what I want to keep most: not a grand occasion, only the comfort of being known and the little rituals that make an ordinary evening ours.</p>
+                  <p class="journal-copy">Back home, the kettle sang as leaves tapped at the window. You read aloud, and I wrote down the line—though your voice was what I wanted to keep.</p>
+                  <p class="journal-copy continuation">We let the tea grow cold, trading stories as lamplight gathered around us.</p>
+                  <p class="journal-copy continuation">You told me about the pear tree, crooked gate, and wild mint in your childhood garden. I tried to remember every detail.</p>
+                  <p class="journal-copy continuation">We promised to take the long way next time. By evening, the rain had softened and the whole room seemed to exhale.</p>
                 </div>
                 <figure class="journal-photo memory-photo">
                   <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&amp;fit=crop&amp;w=240&amp;q=70" alt="Blue hills fading into evening mist" loading="lazy" />
@@ -496,11 +494,10 @@
                       <img src="https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&amp;fit=crop&amp;w=320&amp;q=75" alt="Golden light falling across an autumn field" loading="lazy" />
                       <span class="photo-caption">Last light · 5:30</span>
                     </span>
-                    <span class="journal-copy">By the window, while the kettle sang, the whole room turned amber. A pressed leaf slipped from your coat and landed beside my cup; I tucked it here before it could crumble.</span>
-                    <span class="journal-copy continuation">You told me about the garden you loved as a child: the pear tree, the crooked gate, the patch of mint that always grew wild. I tried to remember every detail.</span>
-                    <span class="journal-copy continuation">When the light began to fade, we promised to take the long way home next time, even if the sky threatened rain again. I wrote it down so neither of us would forget.</span>
-                    <span class="journal-copy continuation">At the corner, a little dog shook rainwater from its coat and made us both laugh. The sky had turned rose-colored by then, and the first lamps were winking on along the street.</span>
-                    <span class="journal-copy continuation">I folded the pressed leaf into this page as a tiny bookmark for the day, a sign that the things we almost overlook are often the ones we miss most.</span>
+                    <span class="journal-copy">By the window, the kettle sang and the room turned amber. A pressed leaf slipped from your coat; I tucked it here before it could crumble.</span>
+                    <span class="journal-copy continuation">You told me about the pear tree and wild mint in your childhood garden. I tried to remember every detail.</span>
+                    <span class="journal-copy continuation">As the light faded, we promised to take the long way home next time. I wrote it down so neither of us would forget.</span>
+                    <span class="journal-copy continuation">A little dog shook rain from its coat at the corner and made us laugh all the way home.</span>
                   </span>
                   <span class="journal-photo memory-photo">
                     <img src="https://images.unsplash.com/photo-1445116572660-236099ec97a0?auto=format&amp;fit=crop&amp;w=240&amp;q=70" alt="A quiet cafe table beside a sunlit window" loading="lazy" />
@@ -517,11 +514,10 @@
                       <img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&amp;fit=crop&amp;w=320&amp;q=75" alt="Soft sunlight on a calm shoreline" loading="lazy" />
                       <span class="photo-caption">Somewhere quiet · Sunday</span>
                     </span>
-                    <span class="journal-copy">We spoke of nothing urgent and everything important. Keep this small proof that a day can be beautiful without asking anything of us, just a little warmth and somewhere to sit together.</span>
-                    <span class="journal-copy continuation">The tide kept drawing its soft silver lines on the sand. We gathered two smooth stones for the windowsill and watched gulls turn against the pale sky.</span>
-                    <span class="journal-copy continuation">I hope that when this page finds you again, you can feel the quiet of that morning and know how grateful I was to share it. There are days I want to fold up and carry with me; this is one.</span>
-                    <span class="journal-copy continuation">We walked until the shore bent out of sight, talking about the places we still hope to see and the small comforts we would bring along. The wind was cold, but your hand was warm in mine.</span>
-                    <span class="journal-copy continuation">On the way back, we found a feather caught between two stones. I tucked it carefully into my notebook and promised to write down the rest of the day before it slipped from memory.</span>
+                    <span class="journal-copy">We spoke of nothing urgent and everything important. It was a day made beautiful by a little warmth and somewhere to sit together.</span>
+                    <span class="journal-copy continuation">The tide drew silver lines on the sand. We gathered two smooth stones and watched gulls cross the pale sky.</span>
+                    <span class="journal-copy continuation">We walked until the shore bent out of sight, talking about places we hope to see and the comforts we would bring along.</span>
+                    <span class="journal-copy continuation">On the way back, I found a feather between two stones and tucked it into my notebook for safekeeping.</span>
                   </span>
                   <span class="journal-photo memory-photo">
                     <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&amp;fit=crop&amp;w=240&amp;q=70" alt="A still lake beneath a soft evening sky" loading="lazy" />
