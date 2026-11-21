@@ -284,13 +284,13 @@
     .letter-top { z-index: 3; border-radius: 4px 3px 0 0; }
     .letter-body { display: grid; grid-template-rows: 0fr; transform-style: preserve-3d; transition: grid-template-rows 960ms cubic-bezier(0.22, 1, 0.36, 1); }
     .letter-body-inner { min-height: 0; overflow: visible; transform-style: preserve-3d; }
-    .letter-middle { z-index: 2; transform: rotateX(-180deg); transform-origin: top center; backface-visibility: hidden; transition: transform 650ms cubic-bezier(0.22, 1, 0.36, 1); transition-delay: 260ms; }
+    .letter-middle { z-index: 2; transform: rotateX(-180deg); transform-origin: top center; backface-visibility: hidden; transition: transform 650ms cubic-bezier(0.22, 1, 0.36, 1); transition-delay: 240ms; }
     .letter-bottom { z-index: 1; transform: rotateX(-180deg); transform-origin: top center; backface-visibility: hidden; transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1); transition-delay: 0ms; border-radius: 0 0 5px 4px; }
     .letter-middle::before, .letter-bottom::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 20px; pointer-events: none; opacity: 0.95; background: linear-gradient(180deg, rgba(74, 14, 25, 0.24), rgba(74, 14, 25, 0.08) 4px, rgba(255, 255, 255, 0.42) 9px, transparent 20px); transition: opacity 650ms ease; }
     .letter-sheet.unfolded .letter-body { grid-template-rows: 1fr; }
     .letter-sheet.unfolded .letter-middle, .letter-sheet.unfolded .letter-bottom { transform: rotateX(0); }
     .letter-sheet.unfolded .letter-middle { transition-delay: 0ms; }
-    .letter-sheet.unfolded .letter-bottom { transition-delay: 260ms; }
+    .letter-sheet.unfolded .letter-bottom { transition-delay: 240ms; }
     .letter-sheet.unfolded .letter-middle::before, .letter-sheet.unfolded .letter-bottom::before { opacity: 0.38; }
     .letter-tag { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--burgundy-mid); font-weight: 600; margin-bottom: 6px; }
     .letter-note { font-family: var(--font-serif); font-style: italic; font-size: 18px; line-height: 1.4; color: var(--burgundy-dark); }
