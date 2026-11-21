@@ -1,50 +1,1239 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DearDiary — Your little corner of the internet</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DearDiary — Your Little Corner of the Internet, Bound in Paper & Light</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Serif+Display:ital@0;1&family=Reenie+Beanie&display=swap" rel="stylesheet" />
 
-    <style>
-        body {
-            background-color: #faf6ef;
-            color: #59483f;
-            font-family: Georgia, serif;
-            text-align: center;
-            padding: 100px 20px;
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cream: {
+              canvas: '#FAF6EB',
+              glow: '#FBF5E6',
+              laid: '#F5EFE0',
+              card: '#FFFDF9'
+            },
+            burgundy: {
+              deep: '#6E1E2C',
+              cherry: '#982F3D',
+              soft: '#B54A58',
+              tint: '#F3E5E7'
+            },
+            butter: {
+              light: '#F9EBC1',
+              warm: '#F6DF96',
+              base: '#F2DD9B',
+              ochre: '#E6CA78',
+              deep: '#CFAF56'
+            },
+            ink: {
+              primary: '#292725',
+              warm: '#3D2E28',
+              taupe: '#7A6F64',
+              muted: '#9C9083'
+            },
+            stationery: {
+              sage: '#71816A',
+              rose: '#D7A29C',
+              beige: '#D7C5A9',
+              hairline: '#E3DBC8'
+            }
+          },
+          fontFamily: {
+            editorial: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            display: ['"DM Serif Display"', 'Georgia', 'serif'],
+            sans: ['"DM Sans"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            hand: ['"Reenie Beanie"', 'cursive']
+          },
+          boxShadow: {
+            'stationery': '0 18px 42px -14px rgba(61, 46, 40, 0.11), 0 4px 14px -3px rgba(61, 46, 40, 0.06)',
+            'book': '14px 20px 36px -10px rgba(41, 39, 37, 0.24), 4px 6px 12px -2px rgba(41, 39, 37, 0.12)',
+            'polaroid': '0 8px 20px -4px rgba(41, 39, 37, 0.14), 0 2px 6px -1px rgba(41, 39, 37, 0.08)'
+          }
         }
+      }
+    };
+  </script>
 
-        h1 {
-            font-size: 48px;
-        }
+  <style>
+    /* Base Cotton Rag Paper Surface & Radial Butter Glow */
+    body {
+      background-color: #FAF6EB;
+      background-image:
+        radial-gradient(ellipse 75% 45% at 50% 0%, rgba(246, 223, 150, 0.42) 0%, rgba(250, 246, 235, 0) 70%),
+        radial-gradient(circle at 88% 36%, rgba(242, 221, 155, 0.26) 0%, transparent 52%),
+        radial-gradient(circle at 12% 78%, rgba(215, 162, 156, 0.14) 0%, transparent 48%);
+      color: #292725;
+      font-family: 'DM Sans', sans-serif;
+      overflow-x: hidden;
+    }
 
-        p {
-            font-size: 18px;
-        }
+    /* Subtle Organic SVG Cotton Grain Overlay */
+    .paper-grain-overlay {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 50;
+      opacity: 0.34;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='cottonNoise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='1 0 0 0 0.96  0 1 0 0 0.93  0 0 1 0 0.86  0 0 0 0.14 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23cottonNoise)'/%3E%3C/svg%3E");
+    }
 
-        a {
-            display: inline-block;
-            background: #a87970;
-            color: white;
-            padding: 14px 25px;
-            border-radius: 25px;
-            text-decoration: none;
-        }
-    </style>
+    /* Laid Paper Horizontal Ribbing Texture */
+    .laid-paper {
+      background-color: #FFFDF8;
+      background-image:
+        repeating-linear-gradient(
+          0deg,
+          rgba(122, 111, 100, 0.032) 0px,
+          rgba(122, 111, 100, 0.032) 1px,
+          transparent 1px,
+          transparent 5px
+        ),
+        repeating-linear-gradient(
+          90deg,
+          rgba(122, 111, 100, 0.025) 0px,
+          rgba(122, 111, 100, 0.025) 1px,
+          transparent 1px,
+          transparent 26px
+        );
+    }
+
+    /* Butter Yellow Laid Stationery Texture */
+    .butter-stationery {
+      background-color: #F6DF96;
+      background-image:
+        linear-gradient(145deg, rgba(255, 252, 240, 0.55) 0%, rgba(230, 202, 120, 0.28) 100%),
+        repeating-linear-gradient(
+          0deg,
+          rgba(110, 30, 44, 0.03) 0px,
+          rgba(110, 30, 44, 0.03) 1px,
+          transparent 1px,
+          transparent 6px
+        );
+    }
+
+    /* Woven Bookcloth Linen Texture (Burgundy & Butter) */
+    .bookcloth-burgundy {
+      background-color: #6E1E2C;
+      background-image:
+        linear-gradient(115deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 45%, rgba(25,6,10,0.28) 100%),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.04) 0px, rgba(255,255,255,0.04) 1px, transparent 1px, transparent 3px),
+        repeating-linear-gradient(90deg, rgba(0,0,0,0.08) 0px, rgba(0,0,0,0.08) 1px, transparent 1px, transparent 3px);
+    }
+
+    .bookcloth-butter {
+      background-color: #F2DD9B;
+      background-image:
+        linear-gradient(125deg, rgba(255,255,255,0.38) 0%, rgba(255,255,255,0) 50%, rgba(168,136,56,0.18) 100%),
+        repeating-linear-gradient(0deg, rgba(110,30,44,0.035) 0px, rgba(110,30,44,0.035) 1px, transparent 1px, transparent 3px),
+        repeating-linear-gradient(90deg, rgba(110,30,44,0.035) 0px, rgba(110,30,44,0.035) 1px, transparent 1px, transparent 3px);
+    }
+
+    .bookcloth-sage {
+      background-color: #71816A;
+      background-image:
+        linear-gradient(125deg, rgba(255,255,255,0.12) 0%, rgba(0,0,0,0.15) 100%),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.04) 0px, rgba(255,255,255,0.04) 1px, transparent 1px, transparent 3px),
+        repeating-linear-gradient(90deg, rgba(0,0,0,0.06) 0px, rgba(0,0,0,0.06) 1px, transparent 1px, transparent 3px);
+    }
+
+    /* Gold Foil Debossed Typography on Covers */
+    .foil-gold {
+      color: #F6DF96;
+      text-shadow: 0 1px 0 rgba(36, 8, 14, 0.7), 0 -0.5px 0 rgba(255, 245, 205, 0.35);
+    }
+
+    .debossed-ink {
+      color: #5E1925;
+      text-shadow: 0 1px 0 rgba(255, 250, 235, 0.65);
+    }
+
+    /* Serrated Washi Tape Strip */
+    .washi-tape {
+      background: rgba(246, 223, 150, 0.76);
+      backdrop-filter: blur(1px);
+      box-shadow: 0 1px 3px rgba(61, 46, 40, 0.1);
+      clip-path: polygon(
+        0% 4%, 4% 0%, 8% 5%, 12% 0%, 16% 4%, 20% 0%, 24% 5%, 28% 0%, 32% 4%, 36% 0%,
+        40% 5%, 44% 0%, 48% 4%, 52% 0%, 56% 5%, 60% 0%, 64% 4%, 68% 0%, 72% 5%, 76% 0%,
+        80% 4%, 84% 0%, 88% 5%, 92% 0%, 96% 4%, 100% 0%,
+        100% 96%, 96% 100%, 92% 95%, 88% 100%, 84% 96%, 80% 100%, 76% 95%, 72% 100%,
+        68% 96%, 64% 100%, 60% 95%, 56% 100%, 52% 96%, 48% 100%, 44% 95%, 40% 100%,
+        36% 96%, 32% 100%, 28% 95%, 24% 100%, 20% 96%, 16% 100%, 12% 95%, 8% 100%, 4% 96%, 0% 100%
+      );
+    }
+
+    .washi-tape-rose {
+      background: rgba(215, 162, 156, 0.68);
+    }
+
+    /* Stacked Cream Paper Page Edges */
+    .page-edges-right {
+      background: repeating-linear-gradient(
+        90deg,
+        #FAF5E8 0px,
+        #FAF5E8 1.5px,
+        #E4DAC6 1.5px,
+        #E4DAC6 3px
+      );
+    }
+
+    /* French Groove Spine Crease */
+    .spine-groove {
+      background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.14) 0%,
+        rgba(0, 0, 0, 0.24) 45%,
+        rgba(255, 255, 255, 0.08) 70%,
+        transparent 100%
+      );
+    }
+
+    /* 3D Hero Book Hover Interaction */
+    .hero-book-wrap {
+      perspective: 1100px;
+    }
+    .hero-book-cover {
+      transform-origin: left center;
+      transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.65s ease;
+    }
+    .hero-book-wrap:hover .hero-book-cover,
+    .hero-book-wrap.is-peeked .hero-book-cover {
+      transform: rotateY(-22deg) translateZ(4px);
+    }
+
+    /* Vertical Unfolding Letter Panels (Strictly Envelope-Free) */
+    .fold-panel-mid {
+      transform-origin: top center;
+      transition: max-height 0.55s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.45s ease, transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transform: perspective(800px) rotateX(-18deg);
+    }
+    .fold-panel-mid.is-unfolded {
+      max-height: 180px;
+      opacity: 1;
+      transform: perspective(800px) rotateX(0deg);
+    }
+
+    .fold-panel-bot {
+      transform-origin: top center;
+      transition: max-height 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.12s, opacity 0.5s ease 0.12s, transform 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.12s;
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transform: perspective(800px) rotateX(-18deg);
+    }
+    .fold-panel-bot.is-unfolded {
+      max-height: 180px;
+      opacity: 1;
+      transform: perspective(800px) rotateX(0deg);
+    }
+
+    /* Crease Ridge Line Shadow on Folded Stationery */
+    .paper-crease-line {
+      height: 2px;
+      background: linear-gradient(
+        180deg,
+        rgba(61, 46, 40, 0.12) 0%,
+        rgba(255, 255, 255, 0.85) 55%,
+        rgba(61, 46, 40, 0.04) 100%
+      );
+    }
+
+    /* Book Spread Page Flip Transition */
+    .spread-page-content {
+      transition: opacity 0.32s ease, transform 0.32s ease;
+    }
+    .spread-page-content.flipping {
+      opacity: 0;
+      transform: translateX(-8px);
+    }
+  </style>
 </head>
 
-<body>
+<body class="antialiased selection:bg-butter-warm selection:text-burgundy-deep">
+  <!-- Tactile Cotton Rag Paper Grain Overlay -->
+  <div class="paper-grain-overlay" aria-hidden="true"></div>
 
-    <h1>DearDiary ♡</h1>
+  <!-- 1. MINIMAL EDITORIAL TOP NAVIGATION -->
+  <header class="sticky top-0 z-40 bg-cream-canvas/90 backdrop-blur-md border-b border-stationery-hairline">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8 h-18 py-4 flex items-center justify-between">
+      <!-- Brand Wordmark + Minimalist Cherry Emblem -->
+      <a href="#" class="flex items-center gap-2.5 group focus:outline-none">
+        <svg class="w-7 h-7 transition-transform duration-300 group-hover:scale-105" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- Delicate Botanical Stems -->
+          <path d="M18.5 6.5C15.8 11.5 13.5 16.5 12.2 21.5" stroke="#71816A" stroke-width="1.5" stroke-linecap="round" />
+          <path d="M18.5 6.5C21.2 12 23.2 17.5 24.4 23" stroke="#71816A" stroke-width="1.5" stroke-linecap="round" />
+          <!-- Small Botanical Leaf -->
+          <path d="M18.5 6.5C21.5 5.2 25 6.3 26.2 8.8C23.5 9.8 20.3 8.9 18.5 6.5Z" fill="#71816A" fill-opacity="0.85" />
+          <!-- Left Deep Burgundy Cherry -->
+          <circle cx="11.5" cy="24" r="5.3" fill="#6E1E2C" />
+          <path d="M9.6 22.3C10.1 21.4 11 21 11.9 21" stroke="#F6DF96" stroke-width="1.1" stroke-linecap="round" opacity="0.7" />
+          <!-- Right Muted Cherry -->
+          <circle cx="24.2" cy="25.5" r="4.8" fill="#982F3D" />
+          <path d="M22.5 23.9C23 23.1 23.8 22.8 24.6 22.8" stroke="#F6DF96" stroke-width="1.1" stroke-linecap="round" opacity="0.7" />
+        </svg>
+        <span class="font-editorial text-2xl sm:text-[26px] font-semibold tracking-tight text-burgundy-deep">
+          DearDiary
+        </span>
+      </a>
 
-    <p>A little place to collect your memories, thoughts and stories.</p>
+      <!-- Navigation Links -->
+      <nav class="hidden md:flex items-center gap-9 text-sm text-ink-taupe font-medium">
+        <a href="#about" class="hover:text-burgundy-deep transition-colors">About</a>
+        <a href="#experience" class="hover:text-burgundy-deep transition-colors">The Experience</a>
+        <a href="#features" class="hover:text-burgundy-deep transition-colors">Features</a>
+      </nav>
 
-    <p>Your memories deserve more than a camera roll.</p>
+      <!-- Waitlist CTA Button -->
+      <div class="flex items-center gap-3">
+        <a href="#waitlist" class="inline-flex items-center justify-center px-4 py-2 sm:px-5 sm:py-2.5 rounded-lg bg-burgundy-deep text-cream-card text-sm font-medium tracking-wide hover:bg-burgundy-cherry transition-all shadow-sm">
+          Join Waitlist
+        </a>
+      </div>
+    </div>
+  </header>
 
-    <a href="YOUR_GOOGLE_FORM_LINK">
-        Join the early access list
-    </a>
+  <main>
+    <!-- 2. HERO SECTION WITH INTERACTIVE PRODUCT MOCKUP -->
+    <section class="pt-12 pb-20 sm:pt-20 sm:pb-28 px-5 sm:px-8">
+      <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
+        <!-- Left Column: Editorial Copy & CTA -->
+        <div class="lg:col-span-6 space-y-6 text-left">
+          <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-md bg-butter-light/80 border border-butter-ochre/70 text-burgundy-deep text-xs font-medium tracking-[0.14em] uppercase">
+            <span class="w-1.5 h-1.5 rounded-full bg-burgundy-deep"></span>
+            Private Beta · Autumn 2026
+          </div>
 
+          <h1 class="font-editorial text-4xl sm:text-5xl lg:text-[56px] leading-[1.08] font-semibold text-ink-warm tracking-tight">
+            Your little corner of the internet, <span class="italic font-normal text-burgundy-deep">bound in paper &amp; light.</span>
+          </h1>
+
+          <p class="text-base sm:text-lg text-ink-taupe leading-relaxed max-w-xl">
+            A quiet digital sanctuary for scrapbooks that turn like real pages and letters that unfold in your hands—crafted without feeds, algorithms, or noise.
+          </p>
+
+          <div class="pt-2 flex flex-wrap items-center gap-4 sm:gap-6">
+            <a href="#waitlist" class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg bg-burgundy-deep text-cream-card text-sm sm:text-base font-medium hover:bg-burgundy-cherry transition-all shadow-stationery">
+              <span>Request Early Access</span>
+              <span aria-hidden="true">→</span>
+            </a>
+
+            <a href="#experience" class="inline-flex items-center gap-1.5 text-sm sm:text-base font-medium text-burgundy-deep hover:text-burgundy-cherry underline underline-offset-4 decoration-butter-ochre hover:decoration-burgundy-deep transition-colors py-2">
+              Explore the experience
+            </a>
+          </div>
+
+          <!-- Quiet Trust / Stationery Note -->
+          <div class="pt-4 border-t border-stationery-hairline/90 flex items-center gap-4 text-xs text-ink-taupe">
+            <span class="inline-flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-stationery-sage"></span>
+              100% Private Archive
+            </span>
+            <span>·</span>
+            <span>No Feeds or Follower Counts</span>
+            <span class="hidden sm:inline">·</span>
+            <span class="hidden sm:inline">Web &amp; Tablet</span>
+          </div>
+        </div>
+
+        <!-- Right Column: Interactive DearDiary Desk Mockup -->
+        <div class="lg:col-span-6">
+          <div class="relative mx-auto max-w-xl">
+            <!-- Decorative Butter-Yellow Washi Tape Accent on Top Corner -->
+            <div class="washi-tape w-24 h-6 absolute -top-3 left-10 -rotate-3 z-20 pointer-events-none"></div>
+
+            <!-- Browser / Editorial Desk Window Frame -->
+            <div class="rounded-xl border border-stationery-hairline bg-cream-card shadow-stationery overflow-hidden">
+              <!-- Minimal Browser Top Chrome -->
+              <div class="px-4 py-2.5 bg-cream-laid border-b border-stationery-hairline flex items-center justify-between">
+                <div class="flex items-center gap-1.5">
+                  <span class="w-2.5 h-2.5 rounded-full bg-burgundy-cherry/40"></span>
+                  <span class="w-2.5 h-2.5 rounded-full bg-butter-ochre"></span>
+                  <span class="w-2.5 h-2.5 rounded-full bg-stationery-sage/50"></span>
+                </div>
+                <div class="px-3 py-0.5 rounded bg-cream-canvas border border-stationery-hairline text-[11px] text-ink-taupe tracking-wide">
+                  deardiary.space/library
+                </div>
+                <span class="text-[11px] font-medium text-burgundy-deep">Interactive Preview</span>
+              </div>
+
+              <!-- Inside the DearDiary Sanctuary Desk -->
+              <div class="p-6 sm:p-8 bg-cream-canvas relative" style="background-image: radial-gradient(circle at 50% 15%, rgba(246, 223, 150, 0.48), transparent 72%);">
+                <!-- Mini App Header -->
+                <div class="flex items-center justify-between pb-6 border-b border-stationery-hairline/70">
+                  <span class="font-editorial text-lg font-semibold text-burgundy-deep">DearDiary</span>
+                  <div class="flex items-center gap-4 text-[11px] text-ink-taupe">
+                    <span class="text-burgundy-deep font-medium underline underline-offset-4 decoration-butter-ochre">My Collection</span>
+                    <span>Archive</span>
+                  </div>
+                </div>
+
+                <!-- App Welcome Header -->
+                <div class="text-center py-6">
+                  <p class="text-[10px] uppercase tracking-[0.18em] text-burgundy-cherry/80 mb-1">Personal Library</p>
+                  <h2 class="font-editorial text-2xl sm:text-3xl text-ink-warm font-medium">Your little world.</h2>
+                  <p class="text-xs text-ink-taupe mt-1">A place for everything you never want to forget.</p>
+                </div>
+
+                <!-- Interactive Side-by-Side Keepsake Objects -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 items-center pt-2 pb-3">
+                  <!-- Object 1: Tactile 3D Burgundy Buckram Hardcover Book -->
+                  <div class="flex flex-col items-center">
+                    <button
+                      type="button"
+                      id="heroBookTrigger"
+                      onclick="toggleHeroBook()"
+                      aria-label="Preview hardcover book"
+                      class="hero-book-wrap group relative w-40 h-52 cursor-pointer focus:outline-none text-left"
+                    >
+                      <!-- Stacked Cream Pages Beneath Cover -->
+                      <div class="absolute inset-y-1.5 right-0 w-36 rounded-r-md bg-cream-card border border-stationery-hairline shadow-inner flex flex-col justify-between p-3 pl-6">
+                        <div class="space-y-1.5 opacity-75">
+                          <div class="h-1.5 w-14 bg-butter-ochre/60 rounded"></div>
+                          <div class="h-1 w-20 bg-ink-taupe/25 rounded"></div>
+                          <div class="h-1 w-16 bg-ink-taupe/25 rounded"></div>
+                        </div>
+                        <p class="font-hand text-sm text-burgundy-deep leading-tight">“Sunday morning coffee by the window...”</p>
+                      </div>
+
+                      <!-- Front Woven Burgundy Cloth Cover -->
+                      <div class="hero-book-cover relative w-38 h-52 rounded-r-lg rounded-l-sm bookcloth-burgundy shadow-book flex flex-col justify-between p-4 border border-burgundy-deep">
+                        <!-- Left Spine Groove -->
+                        <div class="spine-groove absolute inset-y-0 left-0 w-3.5 rounded-l-sm"></div>
+
+                        <!-- Debossed Gold Border Frame -->
+                        <div class="ml-2 h-full border border-butter-warm/35 rounded-sm p-3 flex flex-col justify-between">
+                          <div class="flex items-center justify-between">
+                            <span class="text-[9px] uppercase tracking-[0.16em] text-butter-warm/80">Vol. IV</span>
+                            <span class="w-1.5 h-1.5 rounded-full bg-butter-warm/70"></span>
+                          </div>
+
+                          <div class="my-auto">
+                            <p class="font-editorial text-lg leading-tight font-semibold foil-gold">
+                              Autumn in Kyoto
+                            </p>
+                            <p class="text-[10px] text-butter-light/75 mt-1 italic font-editorial">
+                              24 pages · 35mm notes
+                            </p>
+                          </div>
+
+                          <div class="text-[9px] text-butter-warm/75 tracking-widest uppercase">
+                            Nov 2026
+                          </div>
+                        </div>
+
+                        <!-- Butter-Gold Grosgrain Bookmark Ribbon -->
+                        <div class="absolute -bottom-2.5 right-6 w-2.5 h-5 bg-butter-warm shadow-sm" style="clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 76%, 0 100%);"></div>
+                      </div>
+                    </button>
+                    <span class="mt-4 text-xs font-medium text-burgundy-deep">Make a Book</span>
+                    <span class="text-[11px] text-ink-taupe">Hover or tap cover to peek</span>
+                  </div>
+
+                  <!-- Object 2: Envelope-Free Tri-Folded Cotton Rag Letter -->
+                  <div class="flex flex-col items-center">
+                    <button
+                      type="button"
+                      id="heroLetterTrigger"
+                      onclick="toggleHeroLetter()"
+                      aria-label="Unfold cotton rag letter"
+                      class="w-44 cursor-pointer focus:outline-none text-left group"
+                    >
+                      <div class="rounded-sm shadow-stationery border border-butter-ochre/80 overflow-hidden transition-transform duration-300 group-hover:-translate-y-0.5">
+                        <!-- Top Fold Panel (Always Visible) -->
+                        <div class="butter-stationery p-3.5 relative">
+                          <div class="flex items-center justify-between text-[9px] uppercase tracking-[0.15em] text-burgundy-deep/80 mb-1.5">
+                            <span>Folded Letter</span>
+                            <span>120gsm</span>
+                          </div>
+                          <p class="font-editorial italic text-base text-burgundy-deep font-semibold leading-snug">
+                            To my future self,
+                          </p>
+                          <p class="text-[10px] text-ink-warm/80 mt-1">
+                            Written on a quiet rainy Tuesday...
+                          </p>
+                        </div>
+
+                        <!-- Crease Line 1 -->
+                        <div class="paper-crease-line"></div>
+
+                        <!-- Middle Unfolding Panel (Revealed on Click) -->
+                        <div id="heroLetterMid" class="fold-panel-mid laid-paper px-3.5 py-2.5">
+                          <p class="font-hand text-base text-ink-warm leading-snug">
+                            Remember how slow this morning felt—warm toast, yellow leaves, and nowhere to rush.
+                          </p>
+                        </div>
+
+                        <!-- Crease Line 2 -->
+                        <div class="paper-crease-line"></div>
+
+                        <!-- Bottom Unfolding Panel -->
+                        <div id="heroLetterBot" class="fold-panel-bot butter-stationery px-3.5 py-2.5 flex items-center justify-between">
+                          <span class="font-editorial italic text-xs text-burgundy-deep">Ever yours, Clara</span>
+                          <span class="text-[9px] text-burgundy-deep/75 uppercase tracking-wider">Fold ↑</span>
+                        </div>
+                      </div>
+                    </button>
+                    <span class="mt-4 text-xs font-medium text-burgundy-deep">Write a Letter</span>
+                    <span id="heroLetterHint" class="text-[11px] text-ink-taupe">Click sheet to unfold ↓</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. SHORT EXPLANATION OF WHAT DEARDIARY IS -->
+    <section id="about" class="py-16 sm:py-24 px-5 sm:px-8 border-y border-stationery-hairline bg-cream-laid/65">
+      <div class="max-w-3xl mx-auto text-center space-y-6">
+        <!-- Minimal Cherry & Olive Leaf Divider Motif -->
+        <div class="flex items-center justify-center gap-3 text-burgundy-deep/70">
+          <span class="h-px w-12 bg-stationery-hairline"></span>
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M12 4C10 8 8.5 11.5 8 15" stroke="#71816A" stroke-width="1.3" stroke-linecap="round" />
+            <path d="M12 4C14 8 15.5 11.5 16 15" stroke="#71816A" stroke-width="1.3" stroke-linecap="round" />
+            <circle cx="7.5" cy="16.5" r="3.3" fill="#6E1E2C" />
+            <circle cx="16.2" cy="17.2" r="3" fill="#982F3D" />
+          </svg>
+          <span class="h-px w-12 bg-stationery-hairline"></span>
+        </div>
+
+        <p class="text-xs uppercase tracking-[0.18em] text-burgundy-cherry font-medium">
+          The Philosophy
+        </p>
+
+        <h2 class="font-editorial text-3xl sm:text-4xl lg:text-[42px] leading-tight text-ink-warm font-medium">
+          A quiet sanctuary for things worth keeping.
+        </h2>
+
+        <p class="font-editorial text-xl sm:text-2xl leading-relaxed text-ink-warm/90 font-normal">
+          The modern internet asks you to perform—to broadcast every thought into an endless, noisy feed. DearDiary is the opposite: a calm, private library built around two tactile keepsakes—multi-page <span class="italic text-burgundy-deep">Books</span> that turn like bound linen journals, and single-sheet <span class="italic text-burgundy-deep">Letters</span> that unfold vertically in your hands.
+        </p>
+
+        <p class="text-sm sm:text-base text-ink-taupe max-w-xl mx-auto leading-relaxed">
+          No likes, no follower counts, and no envelopes to clutter the desk—just cotton rag paper, warm butter-yellow light, and your own words.
+        </p>
+      </div>
+    </section>
+
+    <!-- 4. EXPERIENCE SCREENSHOTS / INTERACTIVE PREVIEWS -->
+    <section id="experience" class="py-20 sm:py-28 px-5 sm:px-8">
+      <div class="max-w-6xl mx-auto">
+        <div class="max-w-2xl mb-14 sm:mb-16">
+          <p class="text-xs uppercase tracking-[0.18em] text-burgundy-cherry font-medium mb-2.5">
+            Inside the Sanctuary
+          </p>
+          <h2 class="font-editorial text-3xl sm:text-4xl lg:text-[44px] leading-tight text-ink-warm font-medium">
+            Two ways to keep a memory, and a calm desk to hold them.
+          </h2>
+        </div>
+
+        <div class="space-y-16 sm:space-y-24">
+          <!-- SCREENSHOT 1: THE DASHBOARD ("YOUR LITTLE WORLD.") -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            <div class="lg:col-span-5 space-y-4">
+              <span class="inline-block px-2.5 py-1 rounded bg-butter-light border border-butter-ochre/70 text-[11px] font-medium tracking-wider uppercase text-burgundy-deep">
+                01 · The Personal Library
+              </span>
+              <h3 class="font-editorial text-2xl sm:text-3xl text-ink-warm font-semibold">
+                Your desk, free of clutter.
+              </h3>
+              <p class="text-sm sm:text-base text-ink-taupe leading-relaxed">
+                Every visit opens onto a warm ivory surface where your bound books and folded stationery rest directly on the page—without heavy boxes, notification badges, or productivity charts.
+              </p>
+              <ul class="space-y-2 pt-2 text-sm text-ink-warm/90">
+                <li class="flex items-center gap-2.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-burgundy-deep"></span>
+                  Titles debossed directly onto cloth covers and paper folds
+                </li>
+                <li class="flex items-center gap-2.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-butter-deep"></span>
+                  Instant creation between a multi-page Book or folded Letter
+                </li>
+              </ul>
+            </div>
+
+            <!-- Realistic Screenshot Frame 1 -->
+            <div class="lg:col-span-7">
+              <div class="rounded-xl border border-stationery-hairline bg-cream-card shadow-stationery overflow-hidden">
+                <div class="px-4 py-2 bg-cream-laid border-b border-stationery-hairline flex items-center justify-between text-[11px] text-ink-taupe">
+                  <span>DearDiary — Collection Shelf</span>
+                  <span class="text-burgundy-deep font-medium">4 Keepsakes Saved</span>
+                </div>
+                <div class="p-6 sm:p-8 bg-cream-canvas">
+                  <div class="flex items-baseline justify-between border-b border-stationery-hairline pb-3 mb-6">
+                    <span class="font-editorial text-xl text-ink-warm font-medium">Your Collection</span>
+                    <div class="flex gap-4 text-xs text-ink-taupe">
+                      <span class="text-burgundy-deep font-medium border-b border-burgundy-deep pb-0.5">All</span>
+                      <span>Books</span>
+                      <span>Letters</span>
+                    </div>
+                  </div>
+
+                  <!-- Standalone Physical Objects Resting Directly on Canvas -->
+                  <div class="grid grid-cols-2 sm:grid-cols-4 gap-5 items-end pt-2">
+                    <!-- Standalone Butter Linen Book -->
+                    <div class="flex flex-col items-center">
+                      <div class="w-28 h-36 rounded-r-md rounded-l-sm bookcloth-butter shadow-book border border-butter-ochre p-3 flex flex-col justify-between relative">
+                        <div class="spine-groove absolute inset-y-0 left-0 w-2.5"></div>
+                        <span class="ml-1.5 text-[8px] uppercase tracking-widest text-burgundy-deep/75">Journal</span>
+                        <p class="ml-1.5 font-editorial text-sm font-semibold debossed-ink leading-tight">Little Moments</p>
+                        <span class="ml-1.5 text-[8px] text-burgundy-deep/70">18 pages</span>
+                      </div>
+                    </div>
+
+                    <!-- Standalone Folded Butter-Cream Letter -->
+                    <div class="flex flex-col items-center">
+                      <div class="w-32 shadow-stationery border border-butter-ochre/80 rounded-sm overflow-hidden">
+                        <div class="butter-stationery p-2.5">
+                          <span class="block text-[7px] uppercase tracking-widest text-burgundy-deep/70">Oct 14</span>
+                          <p class="font-editorial italic text-xs text-burgundy-deep font-semibold mt-0.5">For a rainy Sunday</p>
+                        </div>
+                        <div class="paper-crease-line"></div>
+                        <div class="laid-paper p-2">
+                          <p class="font-hand text-xs text-ink-taupe truncate">When the kettle boils...</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Standalone Burgundy Buckram Book -->
+                    <div class="flex flex-col items-center">
+                      <div class="w-28 h-36 rounded-r-md rounded-l-sm bookcloth-burgundy shadow-book border border-burgundy-deep p-3 flex flex-col justify-between relative">
+                        <div class="spine-groove absolute inset-y-0 left-0 w-2.5"></div>
+                        <span class="ml-1.5 text-[8px] uppercase tracking-widest text-butter-warm/80">Scrapbook</span>
+                        <p class="ml-1.5 font-editorial text-sm font-semibold foil-gold leading-tight">Summer Postcards</p>
+                        <span class="ml-1.5 text-[8px] text-butter-warm/75">12 pages</span>
+                      </div>
+                    </div>
+
+                    <!-- Standalone Sage Cloth Book -->
+                    <div class="flex flex-col items-center">
+                      <div class="w-28 h-36 rounded-r-md rounded-l-sm bookcloth-sage shadow-book border border-stationery-sage p-3 flex flex-col justify-between relative">
+                        <div class="spine-groove absolute inset-y-0 left-0 w-2.5"></div>
+                        <span class="ml-1.5 text-[8px] uppercase tracking-widest text-cream-card/80">Notes</span>
+                        <p class="ml-1.5 font-editorial text-sm font-semibold text-cream-card leading-tight">Garden &amp; Tea</p>
+                        <span class="ml-1.5 text-[8px] text-cream-card/75">9 pages</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SCREENSHOT 2: BOOKS — INTERACTIVE PAGE-TURNING SCRAPBOOKS -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            <!-- Interactive Spread Preview (Left on Desktop) -->
+            <div class="lg:col-span-7 order-2 lg:order-1">
+              <div class="rounded-xl border border-stationery-hairline bg-cream-card shadow-stationery overflow-hidden">
+                <div class="px-4 py-2.5 bg-cream-laid border-b border-stationery-hairline flex items-center justify-between">
+                  <span class="text-xs font-medium text-burgundy-deep font-editorial italic">“Autumn in Kyoto” — Open Spread</span>
+                  <button
+                    type="button"
+                    onclick="turnPreviewSpread()"
+                    class="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-burgundy-deep text-cream-card text-xs font-medium hover:bg-burgundy-cherry transition-colors cursor-pointer"
+                  >
+                    <span>Turn Page</span>
+                    <span aria-hidden="true">↻</span>
+                  </button>
+                </div>
+
+                <!-- Two-Page Open Hardcover Book Spread -->
+                <div class="p-5 sm:p-8 bg-butter-light/35">
+                  <div class="rounded-lg bookcloth-burgundy p-2 sm:p-2.5 shadow-book">
+                    <div id="bookSpreadBody" class="spread-page-content grid grid-cols-1 sm:grid-cols-2 rounded bg-cream-card overflow-hidden relative">
+                      <!-- Center Spine Shadow -->
+                      <div class="hidden sm:block absolute inset-y-0 left-1/2 -translate-x-1/2 w-6 pointer-events-none z-10" style="background: linear-gradient(90deg, transparent, rgba(61,46,40,0.12) 50%, transparent);"></div>
+
+                      <!-- Left Page: Polaroid & Washi Tape -->
+                      <div class="laid-paper p-5 sm:p-6 border-b sm:border-b-0 sm:border-r border-stationery-hairline flex flex-col justify-between min-h-[250px]">
+                        <div class="relative mx-auto w-44 bg-white p-2.5 pb-6 shadow-polaroid border border-stationery-hairline -rotate-2">
+                          <div class="washi-tape w-16 h-4 absolute -top-2 left-1/2 -translate-x-1/2"></div>
+                          <!-- Illustrated Editorial Photography Placeholder -->
+                          <div id="spreadPhotoBox" class="w-full h-28 rounded-xs overflow-hidden relative flex items-end p-2" style="background: linear-gradient(160deg, #E6CA78 0%, #D7A29C 55%, #6E1E2C 100%);">
+                            <svg class="w-full h-full absolute inset-0 opacity-35" viewBox="0 0 160 110" fill="none">
+                              <circle cx="122" cy="28" r="16" fill="#FAF6EB" />
+                              <path d="M0 85 Q45 55 85 78 T160 65 L160 110 L0 110 Z" fill="#292725" />
+                            </svg>
+                            <span id="spreadPhotoCaption" class="relative z-10 text-[10px] text-cream-card font-medium tracking-wide">Philosopher’s Path, 4:15 PM</span>
+                          </div>
+                          <p id="spreadPolaroidHand" class="font-hand text-base text-ink-warm text-center mt-2">golden ginkgo leaves</p>
+                        </div>
+
+                        <div class="flex items-center justify-between text-[10px] text-ink-taupe pt-4">
+                          <span id="spreadLeftPageNum">Page 04</span>
+                          <span>35mm Film</span>
+                        </div>
+                      </div>
+
+                      <!-- Right Page: Journal Entry & Marginalia -->
+                      <div class="laid-paper p-5 sm:p-6 flex flex-col justify-between min-h-[250px]">
+                        <div>
+                          <div class="flex items-center justify-between mb-3">
+                            <span id="spreadDate" class="text-[10px] uppercase tracking-[0.16em] text-burgundy-cherry font-medium">November 14, 2026</span>
+                            <span class="px-2 py-0.5 rounded bg-butter-warm/60 text-[10px] text-burgundy-deep font-medium">Keepsake</span>
+                          </div>
+                          <h4 id="spreadHeading" class="font-editorial text-xl text-ink-warm font-semibold mb-2.5">
+                            Tea beside the canal
+                          </h4>
+                          <p id="spreadText" class="text-xs sm:text-[13px] text-ink-warm/85 leading-relaxed">
+                            We found a tiny wooden tearoom tucked behind a stone lantern. The afternoon light turned the paper screens the exact shade of warm butter, and for two hours nobody checked the time.
+                          </p>
+                        </div>
+
+                        <div class="pt-4 border-t border-stationery-hairline/70 flex items-center justify-between">
+                          <span id="spreadFootnote" class="font-hand text-base text-burgundy-deep">pressed a maple leaf inside →</span>
+                          <span id="spreadRightPageNum" class="text-[10px] text-ink-taupe">Page 05</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Copy (Right on Desktop) -->
+            <div class="lg:col-span-5 order-1 lg:order-2 space-y-4">
+              <span class="inline-block px-2.5 py-1 rounded bg-burgundy-tint border border-burgundy-cherry/20 text-[11px] font-medium tracking-wider uppercase text-burgundy-deep">
+                02 · Interactive Books
+              </span>
+              <h3 class="font-editorial text-2xl sm:text-3xl text-ink-warm font-semibold">
+                Scrapbooks with weight, texture, and turning pages.
+              </h3>
+              <p class="text-sm sm:text-base text-ink-taupe leading-relaxed">
+                Arrange photographs in Polaroid frames, fasten notes with serrated butter-yellow washi tape, and flip smoothly from spread to spread just like a cloth-bound keepsake on your coffee table.
+              </p>
+              <div class="pt-2">
+                <button
+                  type="button"
+                  onclick="turnPreviewSpread()"
+                  class="text-sm font-medium text-burgundy-deep hover:text-burgundy-cherry underline underline-offset-4 decoration-butter-ochre cursor-pointer"
+                >
+                  Flip to the next spread in preview →
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- SCREENSHOT 3: LETTERS — ENVELOPE-FREE VERTICAL UNFOLDING STATIONERY -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            <div class="lg:col-span-5 space-y-4">
+              <span class="inline-block px-2.5 py-1 rounded bg-butter-light border border-butter-ochre/70 text-[11px] font-medium tracking-wider uppercase text-burgundy-deep">
+                03 · Folded Letters
+              </span>
+              <h3 class="font-editorial text-2xl sm:text-3xl text-ink-warm font-semibold">
+                Letters that unfold downward in your hands.
+              </h3>
+              <p class="text-sm sm:text-base text-ink-taupe leading-relaxed">
+                Some thoughts belong on a single sheet of paper rather than an entire book. DearDiary lets you write on tri-folded 120gsm cotton stationery that opens vertically panel-by-panel—never hidden inside an envelope.
+              </p>
+              <div class="pt-2">
+                <button
+                  type="button"
+                  onclick="toggleShowcaseLetter()"
+                  id="showcaseLetterBtn"
+                  class="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-burgundy-deep/30 bg-butter-light/60 text-burgundy-deep text-xs sm:text-sm font-medium hover:bg-butter-warm/70 transition-colors cursor-pointer"
+                >
+                  <span>Unfold the Letter Sheet ↓</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Interactive Vertical Unfolding Letter Frame -->
+            <div class="lg:col-span-7">
+              <div class="rounded-xl border border-stationery-hairline bg-cream-card shadow-stationery p-6 sm:p-10 bg-cream-canvas flex flex-col items-center justify-center min-h-[320px]">
+                <div class="w-full max-w-md shadow-stationery rounded-sm border border-butter-ochre/90 overflow-hidden">
+                  <!-- Top Panel (Always Visible) -->
+                  <div class="butter-stationery p-5 sm:p-6">
+                    <div class="flex items-center justify-between text-[11px] text-burgundy-deep/80 uppercase tracking-[0.15em] mb-2">
+                      <span>No. 07 · Cotton Rag Sheet</span>
+                      <span>November 21, 2026</span>
+                    </div>
+                    <h4 class="font-editorial italic text-2xl text-burgundy-deep font-semibold">
+                      A note before winter arrives
+                    </h4>
+                  </div>
+
+                  <div class="paper-crease-line"></div>
+
+                  <!-- Middle Unfolding Panel -->
+                  <div id="showcaseLetterMid" class="fold-panel-mid laid-paper px-5 sm:px-6 py-4">
+                    <p class="text-sm text-ink-warm leading-relaxed">
+                      I wanted to write this down before the year speeds up again. Today the kitchen smelled of cinnamon and toasted almonds, and the afternoon sun laid a warm yellow square right across the floorboards.
+                    </p>
+                  </div>
+
+                  <div class="paper-crease-line"></div>
+
+                  <!-- Bottom Unfolding Panel -->
+                  <div id="showcaseLetterBot" class="fold-panel-bot laid-paper px-5 sm:px-6 py-4 border-t border-stationery-hairline/40">
+                    <p class="font-hand text-xl text-burgundy-deep leading-snug mb-2">
+                      May you always make room for quiet afternoons like this one.
+                    </p>
+                    <div class="flex items-center justify-between text-xs text-ink-taupe pt-2 border-t border-stationery-hairline/60">
+                      <span class="font-editorial italic text-sm text-ink-warm">With warmth, Maya</span>
+                      <button type="button" onclick="toggleShowcaseLetter()" class="text-burgundy-deep font-medium hover:underline cursor-pointer">
+                        Fold sheet back ↑
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <p id="showcaseLetterCaption" class="mt-4 text-xs text-ink-taupe">
+                  Click “Unfold the Letter Sheet” to release the paper creases downwards.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. FEATURES SECTION ("CRAFTED LIKE FINE STATIONERY") -->
+    <section id="features" class="py-20 sm:py-28 px-5 sm:px-8 border-t border-stationery-hairline bg-cream-laid/50">
+      <div class="max-w-6xl mx-auto">
+        <div class="max-w-2xl mb-14">
+          <p class="text-xs uppercase tracking-[0.18em] text-burgundy-cherry font-medium mb-2.5">
+            Thoughtful Details
+          </p>
+          <h2 class="font-editorial text-3xl sm:text-4xl lg:text-[42px] leading-tight text-ink-warm font-medium">
+            Crafted like fine stationery, built for a lifetime of quiet moments.
+          </h2>
+        </div>
+
+        <!-- 3-Column Editorial Grid with 1px Hairline Borders -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Feature 1 -->
+          <div class="p-7 rounded-xl bg-cream-card border border-stationery-hairline hover:border-butter-ochre transition-colors flex flex-col justify-between">
+            <div>
+              <div class="w-9 h-9 rounded-md bookcloth-burgundy flex items-center justify-center text-butter-warm font-editorial text-base font-semibold mb-5 shadow-xs">
+                I
+              </div>
+              <h3 class="font-editorial text-2xl text-ink-warm font-semibold mb-2.5">
+                Tactile Bookbinding
+              </h3>
+              <p class="text-sm text-ink-taupe leading-relaxed">
+                Dress each notebook in burgundy buckram, warm butter linen, muted sage, or dusty rose—complete with debossed serif titles and grosgrain ribbon bookmarks.
+              </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-stationery-hairline/70 flex items-center gap-2">
+              <span class="w-3.5 h-3.5 rounded-full bg-burgundy-deep border border-black/10" title="Burgundy Buckram"></span>
+              <span class="w-3.5 h-3.5 rounded-full bg-butter-warm border border-black/10" title="Butter Linen"></span>
+              <span class="w-3.5 h-3.5 rounded-full bg-stationery-sage border border-black/10" title="Muted Sage"></span>
+              <span class="w-3.5 h-3.5 rounded-full bg-stationery-rose border border-black/10" title="Dusty Rose"></span>
+            </div>
+          </div>
+
+          <!-- Feature 2 -->
+          <div class="p-7 rounded-xl bg-cream-card border border-stationery-hairline hover:border-butter-ochre transition-colors flex flex-col justify-between">
+            <div>
+              <div class="w-9 h-9 rounded-md butter-stationery border border-butter-ochre flex items-center justify-center text-burgundy-deep font-editorial text-base font-semibold mb-5">
+                II
+              </div>
+              <h3 class="font-editorial text-2xl text-ink-warm font-semibold mb-2.5">
+                Envelope-Free Folded Letters
+              </h3>
+              <p class="text-sm text-ink-taupe leading-relaxed">
+                Write standalone reflections on 120gsm cotton rag sheets that fold into crisp thirds and unfold downward naturally whenever you revisit them.
+              </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-stationery-hairline/70 text-xs text-burgundy-deep font-medium">
+              Vertical tri-fold paper physics
+            </div>
+          </div>
+
+          <!-- Feature 3 -->
+          <div class="p-7 rounded-xl bg-cream-card border border-stationery-hairline hover:border-butter-ochre transition-colors flex flex-col justify-between">
+            <div>
+              <div class="w-9 h-9 rounded-md bg-cream-laid border border-stationery-hairline flex items-center justify-center text-burgundy-deep font-editorial text-base font-semibold mb-5">
+                III
+              </div>
+              <h3 class="font-editorial text-2xl text-ink-warm font-semibold mb-2.5">
+                Scrapbook Collage Canvas
+              </h3>
+              <p class="text-sm text-ink-taupe leading-relaxed">
+                Layer 35mm Polaroid frames, serrated washi tape strips, botanical stamps, and handwritten marginalia effortlessly onto every page spread.
+              </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-stationery-hairline/70 text-xs text-ink-taupe">
+              Photos, stickers &amp; handwritten notes
+            </div>
+          </div>
+
+          <!-- Feature 4 -->
+          <div class="p-7 rounded-xl bg-cream-card border border-stationery-hairline hover:border-butter-ochre transition-colors flex flex-col justify-between">
+            <div>
+              <div class="w-9 h-9 rounded-md bg-cream-laid border border-stationery-hairline flex items-center justify-center text-burgundy-deep font-editorial text-base font-semibold mb-5">
+                IV
+              </div>
+              <h3 class="font-editorial text-2xl text-ink-warm font-semibold mb-2.5">
+                100% Private &amp; Algorithm-Free
+              </h3>
+              <p class="text-sm text-ink-taupe leading-relaxed">
+                Your library belongs solely to you. There are no public feeds, no follower counts, no streaks, and no noisy notifications pulling your attention away.
+              </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-stationery-hairline/70 text-xs text-stationery-sage font-medium">
+              Zero ads · Zero social pressure
+            </div>
+          </div>
+
+          <!-- Feature 5 -->
+          <div class="p-7 rounded-xl bg-cream-card border border-stationery-hairline hover:border-butter-ochre transition-colors flex flex-col justify-between">
+            <div>
+              <div class="w-9 h-9 rounded-md bg-cream-laid border border-stationery-hairline flex items-center justify-center text-burgundy-deep font-editorial text-base font-semibold mb-5">
+                V
+              </div>
+              <h3 class="font-editorial text-2xl text-ink-warm font-semibold mb-2.5">
+                Gentle Writing Prompts
+              </h3>
+              <p class="text-sm text-ink-taupe leading-relaxed">
+                On days when the blank page feels quiet, draw an optional prompt slip—like “What made you smile today?” or “Write a letter to your future self.”
+              </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-stationery-hairline/70 text-xs text-ink-taupe italic font-editorial text-sm">
+              “A memory you wish you could relive...”
+            </div>
+          </div>
+
+          <!-- Feature 6 -->
+          <div class="p-7 rounded-xl bg-cream-card border border-stationery-hairline hover:border-butter-ochre transition-colors flex flex-col justify-between">
+            <div>
+              <div class="w-9 h-9 rounded-md bg-cream-laid border border-stationery-hairline flex items-center justify-center text-burgundy-deep font-editorial text-base font-semibold mb-5">
+                VI
+              </div>
+              <h3 class="font-editorial text-2xl text-ink-warm font-semibold mb-2.5">
+                Built to Last
+              </h3>
+              <p class="text-sm text-ink-taupe leading-relaxed">
+                Your memories are never locked in. Export your books as print-ready PDFs or archive your letters cleanly anytime you wish.
+              </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-stationery-hairline/70 text-xs text-ink-taupe">
+              One-click print &amp; personal archive export
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. EMAIL SIGNUP SECTION ("BE AMONG THE FIRST TO TRY DEARDIARY.") -->
+    <section id="waitlist" class="py-20 sm:py-28 px-5 sm:px-8">
+      <div class="max-w-3xl mx-auto relative">
+        <!-- Serrated Washi Tape Strips Securing the Stationery Card -->
+        <div class="washi-tape w-28 h-6 absolute -top-3 left-8 sm:left-14 -rotate-3 z-20 pointer-events-none"></div>
+        <div class="washi-tape washi-tape-rose w-24 h-6 absolute -top-3 right-8 sm:right-14 rotate-3 z-20 pointer-events-none"></div>
+
+        <!-- Tactile Butter-Yellow & Cream Laid Stationery Card -->
+        <div class="rounded-2xl butter-stationery p-2.5 sm:p-4 shadow-stationery border border-butter-ochre">
+          <div class="rounded-xl laid-paper border border-burgundy-deep/20 px-6 py-12 sm:px-14 sm:py-16 text-center relative overflow-hidden">
+            <!-- Subtle Botanical Cherry Line Illustration in Corner -->
+            <svg class="w-24 h-24 absolute -bottom-3 -right-3 text-burgundy-deep/10 pointer-events-none" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+              <path d="M52 15C44 32 37 48 33 65" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+              <path d="M52 15C60 33 66 50 70 68" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+              <path d="M52 15C62 11 73 15 77 23C68 26 58 23 52 15Z" fill="currentColor" />
+              <circle cx="31" cy="72" r="14" stroke="currentColor" stroke-width="2" />
+              <circle cx="69" cy="76" r="13" stroke="currentColor" stroke-width="2" />
+            </svg>
+
+            <!-- Form View -->
+            <div id="waitlistFormContainer" class="relative z-10 max-w-lg mx-auto">
+              <span class="inline-block px-3 py-1 rounded bg-butter-light border border-butter-ochre text-[11px] uppercase tracking-[0.16em] text-burgundy-deep font-medium mb-4">
+                Early Access Invitation
+              </span>
+
+              <h2 class="font-editorial text-3xl sm:text-4xl lg:text-[44px] leading-tight text-ink-warm font-semibold mb-4">
+                Be among the first to try DearDiary.
+              </h2>
+
+              <p class="text-sm sm:text-base text-ink-taupe leading-relaxed mb-8">
+                We’re opening doors to our first small circle of journalers, letter-writers, and memory keepers. Leave your email for an early invitation.
+              </p>
+
+              <form id="waitlistForm" onsubmit="handleWaitlistSubmit(event)" class="space-y-4 text-left" novalidate>
+                <div class="grid grid-cols-1 sm:grid-cols-12 gap-3">
+                  <div class="sm:col-span-5">
+                    <label for="firstName" class="sr-only">First name (optional)</label>
+                    <input
+                      type="text"
+                      id="firstName"
+                      name="firstName"
+                      placeholder="First name (optional)"
+                      class="w-full px-4 py-3.5 rounded-lg bg-cream-canvas border border-stationery-hairline text-sm text-ink-warm placeholder:text-ink-muted focus:outline-none focus:border-burgundy-deep transition-colors"
+                    />
+                  </div>
+                  <div class="sm:col-span-7">
+                    <label for="emailInput" class="sr-only">Email address</label>
+                    <input
+                      type="email"
+                      id="emailInput"
+                      name="email"
+                      required
+                      placeholder="you@example.com"
+                      class="w-full px-4 py-3.5 rounded-lg bg-cream-canvas border border-stationery-hairline text-sm text-ink-warm placeholder:text-ink-muted focus:outline-none focus:border-burgundy-deep transition-colors"
+                    />
+                  </div>
+                </div>
+
+                <!-- Optional Keepsake Preference Selector -->
+                <div class="flex flex-wrap items-center justify-between gap-2 pt-1">
+                  <span class="text-xs text-ink-taupe">What are you most excited to make?</span>
+                  <div class="inline-flex rounded-lg bg-cream-laid p-1 border border-stationery-hairline text-xs">
+                    <button type="button" data-pref="Books" onclick="selectPreference(this)" class="pref-btn px-3 py-1 rounded-md text-ink-taupe hover:text-burgundy-deep transition-colors cursor-pointer">
+                      Books
+                    </button>
+                    <button type="button" data-pref="Letters" onclick="selectPreference(this)" class="pref-btn px-3 py-1 rounded-md text-ink-taupe hover:text-burgundy-deep transition-colors cursor-pointer">
+                      Letters
+                    </button>
+                    <button type="button" data-pref="Both" onclick="selectPreference(this)" class="pref-btn px-3 py-1 rounded-md bg-butter-warm text-burgundy-deep font-medium shadow-2xs transition-colors cursor-pointer">
+                      Both
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Inline Validation Message Box (Never alert()) -->
+                <div id="formErrorBox" class="hidden px-3.5 py-2.5 rounded-lg bg-burgundy-tint border border-burgundy-cherry/30 text-xs text-burgundy-deep">
+                  Please enter a valid email address so we can send your invitation.
+                </div>
+
+                <button
+                  type="submit"
+                  class="w-full py-3.5 px-6 rounded-lg bg-burgundy-deep text-cream-card text-sm sm:text-base font-medium tracking-wide hover:bg-burgundy-cherry transition-all shadow-stationery cursor-pointer"
+                >
+                  Join the Waitlist
+                </button>
+              </form>
+
+              <p class="mt-4 text-xs text-ink-taupe">
+                Thoughtful updates only. Unsubscribe with a single click anytime.
+              </p>
+            </div>
+
+            <!-- Stamped Stationery Keepsake Pass Confirmation (Shown after Submit) -->
+            <div id="waitlistSuccessCard" class="hidden relative z-10 max-w-md mx-auto py-4">
+              <div class="rounded-xl border-2 border-dashed border-burgundy-deep/35 bg-cream-canvas p-6 sm:p-8 shadow-sm">
+                <div class="flex items-center justify-between text-[11px] uppercase tracking-[0.16em] text-burgundy-cherry font-medium pb-4 border-b border-stationery-hairline">
+                  <span>DearDiary Registry</span>
+                  <span id="inviteNumberBadge" class="px-2 py-0.5 rounded bg-butter-warm text-burgundy-deep font-semibold">Pass #0418</span>
+                </div>
+
+                <div class="py-5 space-y-2">
+                  <p class="font-editorial italic text-2xl sm:text-3xl text-burgundy-deep font-semibold">
+                    You’re on the list<span id="confirmedName"></span>.
+                  </p>
+                  <p class="text-sm text-ink-taupe leading-relaxed">
+                    We’ve reserved an early access seat for <span id="confirmedEmail" class="text-ink-warm font-medium"></span> with <span id="confirmedPref" class="text-burgundy-deep font-medium">Books &amp; Letters</span> ready on your desk.
+                  </p>
+                </div>
+
+                <div class="pt-4 border-t border-stationery-hairline flex items-center justify-between text-xs text-ink-taupe">
+                  <span>Autumn 2026 Cohort</span>
+                  <button type="button" onclick="resetWaitlistForm()" class="text-burgundy-deep hover:underline font-medium cursor-pointer">
+                    Register another email
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 7. MINIMAL EDITORIAL FOOTER -->
+  <footer class="border-t border-stationery-hairline py-12 px-5 sm:px-8 bg-cream-canvas">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+      <div class="flex items-center gap-2">
+        <span class="font-editorial text-xl font-semibold text-burgundy-deep">DearDiary</span>
+        <span class="text-stationery-hairline">·</span>
+        <span class="text-xs sm:text-sm text-ink-taupe">Made for slow thoughts and lasting memories.</span>
+      </div>
+
+      <p class="text-xs text-ink-muted">
+        © 2026 DearDiary. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // 1. Hero Book Interactive Peek Toggle
+    function toggleHeroBook() {
+      const bookWrap = document.getElementById('heroBookTrigger');
+      if (bookWrap) {
+        bookWrap.classList.toggle('is-peeked');
+      }
+    }
+
+    // 2. Hero Tri-Folded Letter Vertical Unfolding Toggle
+    let heroLetterOpen = false;
+    function toggleHeroLetter() {
+      heroLetterOpen = !heroLetterOpen;
+      const mid = document.getElementById('heroLetterMid');
+      const bot = document.getElementById('heroLetterBot');
+      const hint = document.getElementById('heroLetterHint');
+
+      if (mid && bot) {
+        mid.classList.toggle('is-unfolded', heroLetterOpen);
+        bot.classList.toggle('is-unfolded', heroLetterOpen);
+      }
+      if (hint) {
+        hint.textContent = heroLetterOpen ? 'Click sheet to fold ↑' : 'Click sheet to unfold ↓';
+      }
+    }
+
+    // 3. Experience Screenshot 2: Interactive Book Spread Page-Turner
+    const bookSpreads = [
+      {
+        photoGradient: 'linear-gradient(160deg, #E6CA78 0%, #D7A29C 55%, #6E1E2C 100%)',
+        photoCaption: 'Philosopher’s Path, 4:15 PM',
+        polaroidHand: 'golden ginkgo leaves',
+        leftPageNum: 'Page 04',
+        date: 'November 14, 2026',
+        heading: 'Tea beside the canal',
+        text: 'We found a tiny wooden tearoom tucked behind a stone lantern. The afternoon light turned the paper screens the exact shade of warm butter, and for two hours nobody checked the time.',
+        footnote: 'pressed a maple leaf inside →',
+        rightPageNum: 'Page 05'
+      },
+      {
+        photoGradient: 'linear-gradient(155deg, #71816A 0%, #D7C5A9 58%, #3D2E28 100%)',
+        photoCaption: 'Morning Train to Uji, 8:20 AM',
+        polaroidHand: 'mist over the river',
+        leftPageNum: 'Page 06',
+        date: 'November 15, 2026',
+        heading: 'First light & matcha',
+        text: 'Bought warm roasted chestnuts from a kiosk near the station bridge. Even the paper bag felt worth keeping, so I taped the corner stamp straight into the margin here.',
+        footnote: 'saved the train ticket stub →',
+        rightPageNum: 'Page 07'
+      },
+      {
+        photoGradient: 'linear-gradient(150deg, #F6DF96 0%, #982F3D 65%, #292725 100%)',
+        photoCaption: 'Bookshop in Jimbocho, Dusk',
+        polaroidHand: 'secondhand poetry',
+        leftPageNum: 'Page 08',
+        date: 'November 17, 2026',
+        heading: 'Notes from a quiet aisle',
+        text: 'Found an unmarked linen notebook with deckled edges on the bottom shelf. It reminded me why slow objects stay with us long after screens go dark.',
+        footnote: 'for the next autumn trip →',
+        rightPageNum: 'Page 09'
+      }
+    ];
+
+    let currentSpreadIndex = 0;
+
+    function turnPreviewSpread() {
+      const spreadBody = document.getElementById('bookSpreadBody');
+      if (!spreadBody) return;
+
+      spreadBody.classList.add('flipping');
+
+      setTimeout(() => {
+        currentSpreadIndex = (currentSpreadIndex + 1) % bookSpreads.length;
+        const data = bookSpreads[currentSpreadIndex];
+
+        document.getElementById('spreadPhotoBox').style.background = data.photoGradient;
+        document.getElementById('spreadPhotoCaption').textContent = data.photoCaption;
+        document.getElementById('spreadPolaroidHand').textContent = data.polaroidHand;
+        document.getElementById('spreadLeftPageNum').textContent = data.leftPageNum;
+        document.getElementById('spreadDate').textContent = data.date;
+        document.getElementById('spreadHeading').textContent = data.heading;
+        document.getElementById('spreadText').textContent = data.text;
+        document.getElementById('spreadFootnote').textContent = data.footnote;
+        document.getElementById('spreadRightPageNum').textContent = data.rightPageNum;
+
+        spreadBody.classList.remove('flipping');
+      }, 240);
+    }
+
+    // 4. Experience Screenshot 3: Showcase Letter Vertical Unfold Toggle
+    let showcaseLetterOpen = false;
+    function toggleShowcaseLetter() {
+      showcaseLetterOpen = !showcaseLetterOpen;
+      const mid = document.getElementById('showcaseLetterMid');
+      const bot = document.getElementById('showcaseLetterBot');
+      const btn = document.getElementById('showcaseLetterBtn');
+      const caption = document.getElementById('showcaseLetterCaption');
+
+      if (mid && bot) {
+        mid.classList.toggle('is-unfolded', showcaseLetterOpen);
+        bot.classList.toggle('is-unfolded', showcaseLetterOpen);
+      }
+      if (btn) {
+        btn.innerHTML = showcaseLetterOpen
+          ? '<span>Fold Letter Sheet ↑</span>'
+          : '<span>Unfold the Letter Sheet ↓</span>';
+      }
+      if (caption) {
+        caption.textContent = showcaseLetterOpen
+          ? 'All three cotton rag panels revealed—zero envelopes needed.'
+          : 'Click “Unfold the Letter Sheet” to release the paper creases downwards.';
+      }
+    }
+
+    // 5. Waitlist Form Preference & Submission State
+    let selectedPreference = 'Both';
+
+    function selectPreference(buttonEl) {
+      selectedPreference = buttonEl.getAttribute('data-pref') || 'Both';
+      document.querySelectorAll('.pref-btn').forEach((btn) => {
+        btn.classList.remove('bg-butter-warm', 'text-burgundy-deep', 'font-medium', 'shadow-2xs');
+        btn.classList.add('text-ink-taupe');
+      });
+      buttonEl.classList.remove('text-ink-taupe');
+      buttonEl.classList.add('bg-butter-warm', 'text-burgundy-deep', 'font-medium', 'shadow-2xs');
+    }
+
+    function handleWaitlistSubmit(event) {
+      event.preventDefault();
+      const emailInput = document.getElementById('emailInput');
+      const firstNameInput = document.getElementById('firstName');
+      const errorBox = document.getElementById('formErrorBox');
+
+      const emailValue = emailInput.value.trim();
+      const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue);
+
+      if (!emailValid) {
+        errorBox.classList.remove('hidden');
+        emailInput.focus();
+        return;
+      }
+
+      errorBox.classList.add('hidden');
+
+      const nameValue = firstNameInput.value.trim();
+      const confirmedNameEl = document.getElementById('confirmedName');
+      const confirmedEmailEl = document.getElementById('confirmedEmail');
+      const confirmedPrefEl = document.getElementById('confirmedPref');
+      const inviteBadgeEl = document.getElementById('inviteNumberBadge');
+
+      confirmedNameEl.textContent = nameValue ? `, ${nameValue}` : '';
+      confirmedEmailEl.textContent = emailValue;
+      confirmedPrefEl.textContent = selectedPreference === 'Both' ? 'Books & Letters' : selectedPreference;
+
+      // Generate a subtle stationery registry pass number
+      const passNum = Math.floor(412 + Math.random() * 85);
+      inviteBadgeEl.textContent = `Pass #0${passNum}`;
+
+      document.getElementById('waitlistFormContainer').classList.add('hidden');
+      document.getElementById('waitlistSuccessCard').classList.remove('hidden');
+    }
+
+    function resetWaitlistForm() {
+      document.getElementById('waitlistForm').reset();
+      document.getElementById('waitlistSuccessCard').classList.add('hidden');
+      document.getElementById('waitlistFormContainer').classList.remove('hidden');
+    }
+  </script>
 </body>
 </html>
