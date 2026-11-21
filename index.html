@@ -259,20 +259,36 @@
     .open-book::after { content: ""; position: absolute; z-index: 3; pointer-events: none; top: 0; bottom: 0; left: 50%; width: 34px; transform: translateX(-50%); background: linear-gradient(90deg, transparent, rgba(42, 16, 22, 0.17) 26%, rgba(42, 16, 22, 0.07) 42%, rgba(255, 255, 255, 0.54) 50%, rgba(42, 16, 22, 0.09) 60%, rgba(42, 16, 22, 0.16) 76%, transparent); }
     .page-kicker { display: block; color: var(--burgundy-mid); font-size: 8px; font-weight: 600; letter-spacing: 0.13em; text-transform: uppercase; margin-bottom: 7px; }
     .page-title { display: block; font-family: var(--font-serif); font-size: clamp(17px, 1.9vw, 21px); line-height: 1.08; font-weight: 500; color: var(--burgundy-dark); margin-bottom: 7px; }
-    .journal-body { display: block; padding-bottom: 68px; color: var(--ink-muted); font-family: 'Caveat', cursive; font-size: 12.5px; line-height: 1.02; }
+    .journal-body { display: block; padding-bottom: 8px; color: var(--ink-muted); font-family: 'Caveat', cursive; font-size: 12.5px; line-height: 1.02; }
     .journal-body::after { content: ""; display: block; clear: both; }
     .journal-copy { display: block; margin: 0 0 4px; }
-    .journal-photo { position: relative; float: left; width: 40%; margin: 5px 12px 10px 2px; padding: 5px 5px 16px; background: #FFFEF8; border: 1px solid #8B755B; box-shadow: 0 3px 7px rgba(42, 16, 22, 0.2); transform: rotate(-2deg); }
-    .journal-photo.photo-right { float: right; margin: 4px 2px 6px 10px; transform: rotate(2deg); }
+    .journal-photo { --photo-tilt: -2deg; position: relative; float: left; width: 40%; margin: 5px 12px 10px 2px; padding: 5px 5px 16px; background: #FFFEF8; border: 1px solid #8B755B; box-shadow: 0 3px 7px rgba(42, 16, 22, 0.2); transform: rotate(var(--photo-tilt)); shape-outside: margin-box; cursor: grab; transition: margin 220ms ease, transform 220ms ease, box-shadow 220ms ease; }
+    .journal-photo.photo-right { --photo-tilt: 2deg; float: right; margin: 4px 2px 6px 10px; }
+    .journal-photo.photo-left { --photo-tilt: -3deg; float: left; margin: 4px 10px 6px 2px; }
     .journal-photo img { display: block; width: 100%; height: 62px; object-fit: cover; filter: sepia(0.13) saturate(0.82) contrast(1.04); border: 1px solid rgba(74, 14, 25, 0.18); }
-    .journal-photo.memory-photo { position: absolute; z-index: 1; left: 24px; bottom: 30px; float: none; width: 64px; margin: 0; padding: 4px 4px 14px; transform: rotate(3deg); }
+    .journal-photo.memory-photo { --photo-tilt: 3deg; float: right; width: 34%; margin: 8px 2px 8px 8px; padding: 4px 4px 14px; }
     .journal-photo.memory-photo img { height: 36px; }
-    .page-face .journal-photo.memory-photo { left: 22px; bottom: 28px; width: 60px; }
-    .page-face .journal-photo.memory-photo img { height: 34px; }
+    .journal-photo.memory-photo.photo-left { --photo-tilt: -3deg; float: left; margin: 8px 8px 8px 2px; }
+    .journal-body.has-many-photos .journal-photo { width: 30%; padding: 4px 4px 12px; }
+    .journal-body.has-many-photos .journal-photo img { height: 38px; }
+    .journal-body.crowded-photos .journal-photo { width: 25%; padding: 3px 3px 10px; }
+    .journal-body.crowded-photos .journal-photo img { height: 30px; }
+    .journal-body.is-scrollable { overflow-y: auto; }
     .journal-photo figcaption, .journal-photo .photo-caption { position: absolute; right: 4px; bottom: 2px; left: 4px; overflow: hidden; color: #70594B; font-family: var(--font-serif); font-size: 8px; font-style: italic; line-height: 1; text-align: center; white-space: nowrap; }
-    .journal-photo::before { content: ""; position: absolute; z-index: 1; top: -5px; left: 23%; width: 25px; height: 7px; background: rgba(238, 208, 121, 0.82); box-shadow: 0 1px 2px rgba(42, 16, 22, 0.12); transform: rotate(-7deg); }
+    .journal-photo::before, .journal-photo::after { content: ""; position: absolute; z-index: 1; background: repeating-linear-gradient(135deg, rgba(238, 208, 121, 0.78) 0 3px, rgba(251, 231, 174, 0.72) 3px 6px); box-shadow: 0 1px 2px rgba(42, 16, 22, 0.12); }
+    .journal-photo::before { top: -5px; left: 23%; width: 25px; height: 7px; transform: rotate(-7deg); }
+    .journal-photo::after { top: 42%; right: -5px; width: 7px; height: 25px; opacity: 0.72; transform: rotate(6deg); }
+    .journal-photo.photo-right::after, .journal-photo.photo-left::after { right: auto; left: -5px; transform: rotate(-6deg); }
+    .journal-photo.is-dragging { z-index: 4; opacity: 0.78; cursor: grabbing; box-shadow: 0 12px 22px rgba(42, 16, 22, 0.3); }
+    .journal-photo.is-settling { animation: scrapbookSettle 380ms cubic-bezier(0.22, 1, 0.36, 1); }
+    @keyframes scrapbookSettle {
+      0% { transform: translateY(-6px) rotate(calc(var(--photo-tilt) - 2deg)) scale(1.04); box-shadow: 0 12px 22px rgba(42, 16, 22, 0.28); }
+      72% { transform: translateY(1px) rotate(calc(var(--photo-tilt) + 0.5deg)); }
+      100% { transform: translateY(0) rotate(var(--photo-tilt)) scale(1); box-shadow: 0 3px 7px rgba(42, 16, 22, 0.2); }
+    }
+    .book-page.drop-target, .page-face.drop-target { outline: 1px dashed rgba(126, 30, 49, 0.42); outline-offset: -7px; }
     .botanical-sticker { position: absolute; right: 16px; bottom: 42px; color: #7E1E31; opacity: 0.7; font-family: var(--font-serif); font-size: 23px; font-style: italic; transform: rotate(-18deg); }
-    .page-number { position: absolute; bottom: 20px; left: 0; right: 0; text-align: center; color: #9B8061; font-family: var(--font-serif); font-size: 13px; }
+    .page-number { position: absolute; z-index: 2; bottom: 20px; left: 0; right: 0; text-align: center; color: #9B8061; font-family: var(--font-serif); font-size: 13px; }
     .book-leaf { position: absolute; z-index: 2; top: 0; left: 50%; width: 50%; height: 100%; padding: 0; border: 0; border-radius: 0 7px 7px 0; background: transparent; text-align: left; cursor: pointer; transform-origin: left center; transform-style: preserve-3d; box-shadow: 1px 2px 2px rgba(42, 16, 22, 0.12); transition: transform 900ms cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 900ms cubic-bezier(0.25, 0.8, 0.25, 1); }
     .book-leaf::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0; background: linear-gradient(90deg, rgba(42, 16, 22, 0.28), transparent 28%); transition: opacity 450ms ease; }
     .book-leaf.is-turned { transform: rotateY(-180deg); box-shadow: -6px 3px 5px rgba(42, 16, 22, 0.28); }
@@ -343,10 +359,12 @@
       .page-face .journal-copy.continuation:nth-of-type(n+4) { display: none; }
       .journal-photo { width: 43%; margin-right: 7px; }
       .journal-photo img { height: 46px; }
-      .journal-photo.memory-photo { left: 12px; bottom: 20px; width: 50px; }
+      .journal-photo.memory-photo { width: 34%; margin-top: 6px; }
       .journal-photo.memory-photo img { height: 28px; }
-      .page-face .journal-photo.memory-photo { left: 10px; bottom: 18px; width: 48px; }
-      .page-face .journal-photo.memory-photo img { height: 26px; }
+      .journal-photo.memory-photo.photo-left { margin-top: 6px; }
+      .journal-body.has-many-photos .journal-photo img { height: 24px; }
+      .journal-body.crowded-photos .journal-photo img { height: 20px; }
+      .journal-body.is-scrollable { scrollbar-width: thin; }
       .journal-photo.photo-right { margin-left: 7px; }
       .letter-preview .letter-panel { height: auto; min-height: 240px; padding: 20px 22px; }
       .letter-preview .letter-note { font-size: 15px; }
@@ -451,7 +469,7 @@
               <div class="book-page left-page">
                 <div class="page-kicker">Autumn Archive · 01</div>
                 <div class="page-title">The rain came softly</div>
-                <div class="journal-body">
+                <div class="journal-body" data-page-id="page-01">
                   <figure class="journal-photo">
                     <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&amp;fit=crop&amp;w=320&amp;q=75" alt="Misty mountains reflected in a quiet lake" loading="lazy" />
                     <figcaption>By the old lake · October</figcaption>
@@ -460,18 +478,18 @@
                   <p class="journal-copy continuation">Wet leaves and woodsmoke filled the air as a heron rose from the mist.</p>
                   <p class="journal-copy continuation">I tucked a copper leaf beside the date—a little promise to find this quiet again.</p>
                   <p class="journal-copy continuation">At the old bridge, rain made rings on the water. We walked home smiling.</p>
+                  <figure class="journal-photo memory-photo photo-right">
+                    <img src="https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&amp;fit=crop&amp;w=240&amp;q=70" alt="Last golden light across a quiet autumn field" loading="lazy" />
+                    <figcaption>The last gold · 5:30</figcaption>
+                  </figure>
                 </div>
-                <figure class="journal-photo memory-photo">
-                  <img src="https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&amp;fit=crop&amp;w=240&amp;q=70" alt="Last golden light across a quiet autumn field" loading="lazy" />
-                  <figcaption>The last gold · 5:30</figcaption>
-                </figure>
                 <div class="page-number">01</div>
                 <span class="botanical-sticker" aria-hidden="true">❧</span>
               </div>
               <div class="book-page right-page">
                 <div class="page-kicker">14 October · at home</div>
                 <div class="page-title">A little light to keep</div>
-                <div class="journal-body">
+                <div class="journal-body" data-page-id="page-04">
                   <figure class="journal-photo photo-right">
                     <img src="https://images.unsplash.com/photo-1445116572660-236099ec97a0?auto=format&amp;fit=crop&amp;w=320&amp;q=75" alt="A softly lit cafe table on a rainy afternoon" loading="lazy" />
                     <figcaption>Tea, then another · 4:18</figcaption>
@@ -480,11 +498,11 @@
                   <p class="journal-copy continuation">We let the tea grow cold, trading stories as lamplight gathered around us.</p>
                   <p class="journal-copy continuation">You told me about the pear tree, crooked gate, and wild mint in your childhood garden. I tried to remember every detail.</p>
                   <p class="journal-copy continuation">We promised to take the long way next time. By evening, the rain had softened and the whole room seemed to exhale.</p>
+                  <figure class="journal-photo memory-photo photo-left">
+                    <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&amp;fit=crop&amp;w=240&amp;q=70" alt="Blue hills fading into evening mist" loading="lazy" />
+                    <figcaption>On the way home</figcaption>
+                  </figure>
                 </div>
-                <figure class="journal-photo memory-photo">
-                  <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&amp;fit=crop&amp;w=240&amp;q=70" alt="Blue hills fading into evening mist" loading="lazy" />
-                  <figcaption>On the way home</figcaption>
-                </figure>
                 <div class="page-number">04</div>
                 <span class="botanical-sticker" aria-hidden="true">✳</span>
               </div>
@@ -492,7 +510,7 @@
                 <span class="page-face page-front">
                   <span class="page-kicker">Collected moments · 02</span>
                   <span class="page-title">October afternoon</span>
-                  <span class="journal-body">
+                  <span class="journal-body" data-page-id="page-02">
                     <span class="journal-photo">
                       <img src="https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&amp;fit=crop&amp;w=320&amp;q=75" alt="Golden light falling across an autumn field" loading="lazy" />
                       <span class="photo-caption">Last light · 5:30</span>
@@ -501,10 +519,10 @@
                     <span class="journal-copy continuation">You told me about the pear tree and wild mint in your childhood garden. I tried to remember every detail.</span>
                     <span class="journal-copy continuation">As the light faded, we promised to take the long way home next time. I wrote it down so neither of us would forget.</span>
                     <span class="journal-copy continuation">A little dog shook rain from its coat at the corner and made us laugh all the way home.</span>
-                  </span>
-                  <span class="journal-photo memory-photo">
-                    <img src="https://images.unsplash.com/photo-1445116572660-236099ec97a0?auto=format&amp;fit=crop&amp;w=240&amp;q=70" alt="A quiet cafe table beside a sunlit window" loading="lazy" />
-                    <span class="photo-caption">One more cup</span>
+                    <span class="journal-photo memory-photo photo-right">
+                      <img src="https://images.unsplash.com/photo-1445116572660-236099ec97a0?auto=format&amp;fit=crop&amp;w=240&amp;q=70" alt="A quiet cafe table beside a sunlit window" loading="lazy" />
+                      <span class="photo-caption">One more cup</span>
+                    </span>
                   </span>
                   <span class="page-number">02</span>
                   <span class="botanical-sticker" aria-hidden="true">❧</span>
@@ -512,7 +530,7 @@
                 <span class="page-face page-back">
                   <span class="page-kicker">A small keepsake · 03</span>
                   <span class="page-title">Slow Sunday light</span>
-                  <span class="journal-body">
+                  <span class="journal-body" data-page-id="page-03">
                     <span class="journal-photo photo-right">
                       <img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&amp;fit=crop&amp;w=320&amp;q=75" alt="Soft sunlight on a calm shoreline" loading="lazy" />
                       <span class="photo-caption">Somewhere quiet · Sunday</span>
@@ -521,10 +539,10 @@
                     <span class="journal-copy continuation">The tide drew silver lines on the sand. We gathered two smooth stones and watched gulls cross the pale sky.</span>
                     <span class="journal-copy continuation">We walked until the shore bent out of sight, talking about places we hope to see and the comforts we would bring along.</span>
                     <span class="journal-copy continuation">On the way back, I found a feather between two stones and tucked it into my notebook for safekeeping.</span>
-                  </span>
-                  <span class="journal-photo memory-photo">
-                    <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&amp;fit=crop&amp;w=240&amp;q=70" alt="A still lake beneath a soft evening sky" loading="lazy" />
-                    <span class="photo-caption">A day to keep</span>
+                    <span class="journal-photo memory-photo photo-left">
+                      <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&amp;fit=crop&amp;w=240&amp;q=70" alt="A still lake beneath a soft evening sky" loading="lazy" />
+                      <span class="photo-caption">A day to keep</span>
+                    </span>
                   </span>
                   <span class="page-number">03</span>
                   <span class="botanical-sticker" aria-hidden="true">✳</span>
@@ -663,7 +681,157 @@
       element.spellcheck = false;
     });
     const isEditableTarget = (target) => target instanceof Element && target.closest('[contenteditable="true"]') !== null;
+    const openBook = document.querySelector(".open-book");
+    const journalBodies = [...openBook.querySelectorAll(".journal-body")];
+    const photoPlacements = new Map();
+    let photoNumber = 0;
+    journalBodies.forEach((body) => {
+      body.querySelectorAll(".journal-photo").forEach((photo) => {
+        photo.draggable = true;
+        photo.dataset.photoId = `scrapbook-photo-${++photoNumber}`;
+        photo.dataset.pageId = body.dataset.pageId;
+      });
+    });
+    const savePhotoPlacements = () => {
+      journalBodies.forEach((body) => {
+        body.querySelectorAll(".journal-photo").forEach((photo, position) => {
+          const side = photo.classList.contains("photo-right") ? "right" : "left";
+          const placement = {
+            pageId: body.dataset.pageId,
+            position,
+            side,
+            marginTop: photo.style.marginTop,
+            marginLeft: photo.style.marginLeft,
+            marginRight: photo.style.marginRight
+          };
+          photo.dataset.pageId = placement.pageId;
+          photo.dataset.position = String(position);
+          photo.dataset.side = side;
+          photoPlacements.set(photo.dataset.photoId, placement);
+        });
+      });
+    };
+    const updatePhotoDensity = () => {
+      journalBodies.forEach((body) => {
+        const count = body.querySelectorAll(".journal-photo").length;
+        body.classList.toggle("has-many-photos", count >= 3);
+        body.classList.toggle("crowded-photos", count >= 4);
+        body.classList.remove("is-scrollable");
+        body.style.maxHeight = "";
+      });
+    };
+    savePhotoPlacements();
+    let draggedPhoto = null;
+    let suppressPageFlipUntil = 0;
+    openBook.addEventListener("dragstart", (event) => {
+      const target = event.target instanceof Element ? event.target : null;
+      const photo = target ? target.closest(".journal-photo") : null;
+      if (!photo || isEditableTarget(event.target)) {
+        event.preventDefault();
+        return;
+      }
+      draggedPhoto = photo;
+      suppressPageFlipUntil = performance.now() + 500;
+      photo.classList.add("is-dragging");
+      event.dataTransfer.effectAllowed = "move";
+      event.dataTransfer.setData("text/plain", photo.dataset.photoId);
+    });
+    openBook.addEventListener("dragend", () => {
+      if (draggedPhoto) draggedPhoto.classList.remove("is-dragging");
+      draggedPhoto = null;
+      suppressPageFlipUntil = performance.now() + 350;
+      openBook.querySelectorAll(".drop-target").forEach((page) => page.classList.remove("drop-target"));
+    });
+    openBook.querySelectorAll(".book-page, .page-face").forEach((page) => {
+      page.addEventListener("dragover", (event) => {
+        if (!draggedPhoto) return;
+        event.preventDefault();
+        if (event.dataTransfer) event.dataTransfer.dropEffect = "move";
+        page.classList.add("drop-target");
+      });
+      page.addEventListener("dragleave", (event) => {
+        if (!page.contains(event.relatedTarget)) page.classList.remove("drop-target");
+      });
+      page.addEventListener("drop", (event) => {
+        if (!draggedPhoto) return;
+        event.preventDefault();
+        page.classList.remove("drop-target");
+        const body = page.querySelector(".journal-body");
+        if (!body) return;
+        const photo = draggedPhoto;
+
+        const paragraphs = [...body.querySelectorAll(".journal-copy")];
+        let nearestParagraph = null;
+        let nearestIndex = -1;
+        let nearestDistance = Infinity;
+        paragraphs.forEach((paragraph, index) => {
+          const rect = paragraph.getBoundingClientRect();
+          const distance = Math.abs(event.clientY - (rect.top + rect.height / 2));
+          if (distance < nearestDistance) {
+            nearestParagraph = paragraph;
+            nearestIndex = index;
+            nearestDistance = distance;
+          }
+        });
+
+        const bodyRect = body.getBoundingClientRect();
+        const side = event.clientX > bodyRect.left + bodyRect.width / 2 ? "right" : "left";
+        const edgeDistance = side === "right" ? bodyRect.right - event.clientX : event.clientX - bodyRect.left;
+        const horizontalOffset = Math.max(2, Math.min(16, Math.round(edgeDistance / 8) * 8));
+        photo.classList.toggle("photo-right", side === "right");
+        photo.classList.toggle("photo-left", side === "left");
+        photo.style.marginLeft = side === "left" ? `${horizontalOffset}px` : "";
+        photo.style.marginRight = side === "right" ? `${horizontalOffset}px` : "";
+
+        let desiredPosition = paragraphs.length;
+        let verticalOffset = 0;
+        if (nearestParagraph) {
+          const rect = nearestParagraph.getBoundingClientRect();
+          const insertBefore = event.clientY < rect.top + rect.height / 2;
+          const offset = insertBefore ? event.clientY - rect.top : event.clientY - rect.bottom;
+          desiredPosition = nearestIndex + (insertBefore ? 0 : 1);
+          verticalOffset = Math.max(0, Math.min(120, Math.round(offset / 8) * 8));
+        }
+        body.insertBefore(photo, paragraphs[desiredPosition] || null);
+        photo.style.marginTop = `${verticalOffset}px`;
+        updatePhotoDensity();
+
+        const positions = Array.from({ length: paragraphs.length + 1 }, (_, index) => index)
+          .sort((a, b) => Math.abs(a - desiredPosition) - Math.abs(b - desiredPosition));
+        const pageRect = page.getBoundingClientRect();
+        const footerTop = page.querySelector(".page-number").getBoundingClientRect().top;
+        let hasSafePlacement = false;
+        positions.some((position) => {
+          body.insertBefore(photo, paragraphs[position] || null);
+          photo.style.marginTop = position === desiredPosition ? `${verticalOffset}px` : "0px";
+          const bodyBottom = body.getBoundingClientRect().bottom;
+          const photosFit = [...body.querySelectorAll(".journal-photo")]
+            .every((pagePhoto) => pagePhoto.getBoundingClientRect().bottom <= footerTop - 10);
+          if (bodyBottom <= pageRect.bottom - 12 && photosFit) {
+            hasSafePlacement = true;
+            return true;
+          }
+          return false;
+        });
+        if (!hasSafePlacement) {
+          body.insertBefore(photo, paragraphs[desiredPosition] || null);
+          photo.style.marginTop = `${verticalOffset}px`;
+          body.classList.add("is-scrollable");
+          body.style.maxHeight = `${Math.max(100, footerTop - body.getBoundingClientRect().top - 8)}px`;
+          body.scrollTop = Math.max(0, photo.offsetTop - body.clientHeight / 2);
+        }
+
+        photo.classList.remove("is-settling");
+        void photo.offsetWidth;
+        photo.classList.add("is-settling");
+        const settlingPhoto = photo;
+        window.setTimeout(() => settlingPhoto.classList.remove("is-settling"), 400);
+        suppressPageFlipUntil = performance.now() + 350;
+        savePhotoPlacements();
+      });
+    });
     const turnPage = () => {
+      savePhotoPlacements();
       const turned = pageLeaf.classList.toggle("is-turned");
       cyclePageBtn.textContent = turned ? "Turn Back ←" : "Turn Page →";
       bookStatus.textContent = turned
@@ -671,7 +839,8 @@
         : "Click text to edit · Pages 01–02";
     };
     pageLeaf.addEventListener("click", (event) => {
-      if (isEditableTarget(event.target)) return;
+      const target = event.target instanceof Element ? event.target : null;
+      if (isEditableTarget(event.target) || (target && target.closest(".journal-photo")) || performance.now() < suppressPageFlipUntil) return;
       turnPage();
     });
     cyclePageBtn.addEventListener("click", turnPage);
