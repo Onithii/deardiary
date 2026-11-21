@@ -278,27 +278,25 @@
     .book-controls { display: flex; align-items: center; justify-content: space-between; gap: 16px; width: min(100%, 620px); margin: 12px auto 0; }
     .book-status { color: var(--ink-muted); font-size: 13px; }
 
-    .letter-preview { max-width: 620px; margin: 0 auto; }
-    .letter-sheet { position: relative; overflow: hidden; perspective: 1000px; cursor: pointer; border: 1px solid #DEC47B; border-radius: 5px 4px 6px 3px; background-color: #F8EFCF; background-image: var(--cotton-grain), repeating-linear-gradient(0deg, rgba(126, 87, 47, 0.01) 0 1px, transparent 1px 8px), repeating-linear-gradient(90deg, rgba(126, 87, 47, 0.004) 0 1px, transparent 1px 9px), radial-gradient(ellipse at 50% 0%, rgba(255, 255, 255, 0.44), transparent 68%), radial-gradient(ellipse at 50% 50%, transparent 55%, rgba(117, 78, 40, 0.09) 100%), radial-gradient(ellipse at 0% 50%, rgba(117, 78, 40, 0.08), transparent 4%), radial-gradient(ellipse at 100% 50%, rgba(117, 78, 40, 0.08), transparent 4%), linear-gradient(180deg, #FDF6DF 0%, var(--paper-laid) 100%); background-blend-mode: soft-light, multiply, multiply, normal, multiply, multiply, multiply, normal; box-shadow: inset 0 0 10px rgba(117, 78, 40, 0.08), 0 8px 18px rgba(42, 16, 22, 0.1); }
-    .letter-cover, .letter-preview .letter-panel { position: relative; padding: 18px clamp(18px, 4vw, 34px); border: 0; background: transparent; }
-    .letter-cover { box-shadow: inset 0 -7px 10px -11px rgba(42, 16, 22, 0.8); }
-    .letter-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 950ms cubic-bezier(0.18, 0.72, 0.24, 1); }
-    .letter-body-inner { min-height: 0; overflow: hidden; }
-    .letter-preview .letter-panel { padding-top: 21px; transform: rotateX(-88deg); transform-origin: top center; transition: transform 780ms cubic-bezier(0.18, 0.72, 0.24, 1); }
-    .letter-preview .letter-panel::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 16px; pointer-events: none; background: linear-gradient(180deg, rgba(74, 14, 25, 0.2), rgba(74, 14, 25, 0.07) 3px, rgba(255, 255, 255, 0.45) 7px, transparent 16px); }
-    .letter-preview .letter-panel + .letter-panel { border-top: 0; }
-    .letter-preview .letter-panel:last-child { border-radius: 0 0 5px 5px; }
+    .letter-preview { max-width: 580px; margin: 0 auto; }
+    .letter-sheet { position: relative; perspective: 1400px; transform-style: preserve-3d; cursor: pointer; border: 1px solid #DEC47B; border-radius: 5px 4px 6px 3px; background-color: #F8EFCF; background-image: var(--cotton-grain), repeating-linear-gradient(0deg, rgba(126, 87, 47, 0.01) 0 1px, transparent 1px 8px), repeating-linear-gradient(90deg, rgba(126, 87, 47, 0.004) 0 1px, transparent 1px 9px), radial-gradient(ellipse at 50% 0%, rgba(255, 255, 255, 0.44), transparent 68%), radial-gradient(ellipse at 50% 50%, transparent 55%, rgba(117, 78, 40, 0.09) 100%), radial-gradient(ellipse at 0% 50%, rgba(117, 78, 40, 0.08), transparent 4%), radial-gradient(ellipse at 100% 50%, rgba(117, 78, 40, 0.08), transparent 4%), linear-gradient(180deg, #FDF6DF 0%, var(--paper-laid) 100%); background-blend-mode: soft-light, multiply, multiply, normal, multiply, multiply, multiply, normal; box-shadow: inset 0 0 10px rgba(117, 78, 40, 0.08), 0 8px 18px rgba(42, 16, 22, 0.1); }
+    .letter-preview .letter-panel { position: relative; height: 240px; padding: 22px clamp(22px, 4vw, 38px); border: 0; background: transparent; transform-style: preserve-3d; }
+    .letter-top { z-index: 3; border-radius: 4px 3px 0 0; }
+    .letter-body { display: grid; grid-template-rows: 0fr; transform-style: preserve-3d; transition: grid-template-rows 960ms cubic-bezier(0.22, 1, 0.36, 1); }
+    .letter-body-inner { min-height: 0; overflow: visible; transform-style: preserve-3d; }
+    .letter-middle { z-index: 2; transform: rotateX(-180deg); transform-origin: top center; backface-visibility: hidden; transition: transform 650ms cubic-bezier(0.22, 1, 0.36, 1); transition-delay: 260ms; }
+    .letter-bottom { z-index: 1; transform: rotateX(-180deg); transform-origin: top center; backface-visibility: hidden; transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1); transition-delay: 0ms; border-radius: 0 0 5px 4px; }
+    .letter-middle::before, .letter-bottom::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 20px; pointer-events: none; opacity: 0.95; background: linear-gradient(180deg, rgba(74, 14, 25, 0.24), rgba(74, 14, 25, 0.08) 4px, rgba(255, 255, 255, 0.42) 9px, transparent 20px); transition: opacity 650ms ease; }
     .letter-sheet.unfolded .letter-body { grid-template-rows: 1fr; }
-    .letter-sheet.unfolded .letter-panel { transform: rotateX(0); }
-    .letter-sheet.unfolded .letter-panel:nth-child(1) { transition-delay: 0ms; }
-    .letter-sheet.unfolded .letter-panel:nth-child(2) { transition-delay: 140ms; }
-    .letter-sheet.unfolded .letter-panel:nth-child(3) { transition-delay: 280ms; }
-    .letter-sheet.unfolded .letter-panel:nth-child(4) { transition-delay: 420ms; }
+    .letter-sheet.unfolded .letter-middle, .letter-sheet.unfolded .letter-bottom { transform: rotateX(0); }
+    .letter-sheet.unfolded .letter-middle { transition-delay: 0ms; }
+    .letter-sheet.unfolded .letter-bottom { transition-delay: 260ms; }
+    .letter-sheet.unfolded .letter-middle::before, .letter-sheet.unfolded .letter-bottom::before { opacity: 0.38; }
     .letter-tag { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--burgundy-mid); font-weight: 600; margin-bottom: 6px; }
     .letter-note { font-family: var(--font-serif); font-style: italic; font-size: 18px; line-height: 1.4; color: var(--burgundy-dark); }
-    .letter-preview .letter-note { font-family: 'Caveat', cursive; font-size: 18px; line-height: 1.18; }
-    .letter-preview .letter-note + .letter-note { margin-top: 10px; }
-    .letter-preview .letter-signoff { margin-top: 10px; font-size: 21px; line-height: 1.06; }
+    .letter-preview .letter-note { margin: 0 0 9px; font-family: 'Caveat', cursive; font-size: 16.5px; line-height: 1.12; }
+    .letter-preview .letter-salutation { margin: 0 0 6px; font-family: 'Caveat', cursive; font-size: 22px; line-height: 1.05; color: var(--burgundy-dark); }
+    .letter-preview .letter-signoff { margin-top: 8px; font-size: 19px; line-height: 1.06; }
     .letter-preview .handwritten-signature { display: inline-block; margin-top: 2px; font-size: 26px; transform: rotate(-4deg); }
     .letter-controls { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 14px; }
     .letter-hint { color: var(--ink-muted); font-size: 13px; }
@@ -336,11 +334,14 @@
       .journal-photo { width: 43%; margin-right: 7px; }
       .journal-photo img { height: 43px; }
       .journal-photo.photo-right { margin-left: 7px; }
-      .letter-preview .letter-note { font-size: 16px; }
+      .letter-preview .letter-panel { height: auto; min-height: 240px; padding: 20px 22px; }
+      .letter-preview .letter-note { font-size: 15px; }
+      .letter-preview .letter-salutation { font-size: 21px; }
       .book-controls, .letter-controls { align-items: flex-start; flex-direction: column; }
     }
     @media (prefers-reduced-motion: reduce) {
       .book-leaf, .book-leaf::after, .letter-body, .letter-panel { transition-duration: 0.01ms; }
+      .letter-middle, .letter-bottom { transition-delay: 0ms !important; }
     }
   </style>
 </head>
@@ -500,23 +501,21 @@
           <p>A warm sheet of laid paper unfolds downward, panel by panel—no envelope.</p>
           <div class="letter-preview">
             <div class="letter-sheet" id="previewLetter" role="button" tabindex="0" aria-expanded="false" aria-label="Unfold the letter">
-              <div class="letter-cover">
+              <div class="letter-panel letter-top">
                 <div class="letter-tag">Folded Sheet · No Envelope</div>
-                <div class="letter-note">My dearest,</div>
+                <div class="letter-salutation">My dearest,</div>
+                <p class="letter-note">I have been thinking of that slow Sunday afternoon, when the rain softened the windows and we let the tea grow cold while we talked. It felt as though the world had given us a little extra time.</p>
+                <p class="letter-note">I remember the way you laughed at the story in the old book, and how the golden light moved slowly across the table while the kettle sang.</p>
               </div>
               <div class="letter-body">
                 <div class="letter-body-inner">
-                  <div class="letter-panel">
-                    <div class="letter-note">I have been thinking of that slow Sunday afternoon, when the rain softened the windows and we let the tea grow cold while we talked. It felt like the world had given us a little extra time.</div>
+                  <div class="letter-panel letter-middle">
+                    <p class="letter-note">I keep returning to the small things: your coat by the door, the leaves pressed between the pages, and the quiet that settled around us when the rain began. They were ordinary moments, perhaps, but they have become some of my most treasured ones.</p>
+                    <p class="letter-note">I hope the coming days bring you gentle mornings, a favorite song at just the right time, and somewhere peaceful to rest whenever you need it.</p>
                   </div>
-                  <div class="letter-panel">
-                    <div class="letter-note">I keep returning to the small things: your laugh from the kitchen, the golden light on the table, and the book left open between us. They are ordinary moments, perhaps, but they have become some of my most treasured ones.</div>
-                  </div>
-                  <div class="letter-panel">
-                    <div class="letter-note">I hope the coming days bring you gentle mornings, a favorite song at just the right time, and somewhere quiet to rest when you need it. Until we meet again, know that you are remembered with such fondness.</div>
-                  </div>
-                  <div class="letter-panel">
-                    <div class="letter-note letter-signoff">With all my love,<br />Always yours,<br /><span class="handwritten-signature">Mara</span></div>
+                  <div class="letter-panel letter-bottom">
+                    <p class="letter-note">Until we meet again, know that you are remembered with such fondness. I am saving this little piece of our autumn here, so we can find our way back to it whenever we wish.</p>
+                    <p class="letter-note letter-signoff">With all my love,<br />Always yours,<br /><span class="handwritten-signature">Mara</span></p>
                   </div>
                 </div>
               </div>
