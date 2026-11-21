@@ -251,24 +251,24 @@
 
     :root { --cotton-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='table' tableValues='0 .13'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
     .book-stage { perspective: 1600px; padding: 8px 0 4px; }
-    .open-book { position: relative; isolation: isolate; display: grid; grid-template-columns: 1fr 1fr; width: min(100%, 580px); aspect-ratio: 29 / 25; margin: 0 auto; transform-style: preserve-3d; }
+    .open-book { position: relative; isolation: isolate; display: grid; grid-template-columns: 1fr 1fr; width: min(100%, 460px); aspect-ratio: 29 / 25; margin: 0 auto; transform-style: preserve-3d; }
     .open-book::before { content: ""; position: absolute; z-index: -1; inset: -5px -7px -9px; border: 1px solid #6A2730; border-radius: 10px; background: linear-gradient(90deg, #4A0E19, #7E1E31 50%, #4A0E19); box-shadow: 0 12px 18px rgba(42, 16, 22, 0.2); }
-    .book-page { position: relative; min-width: 0; overflow: hidden; padding: 26px clamp(14px, 2.4vw, 26px); background-color: #FCF8EE; background-image: var(--cotton-grain), repeating-linear-gradient(0deg, rgba(126, 87, 47, 0.01) 0 1px, transparent 1px 5px), repeating-linear-gradient(90deg, rgba(126, 87, 47, 0.007) 0 1px, transparent 1px 6px), radial-gradient(ellipse at 48% 48%, rgba(255, 255, 255, 0.42), transparent 70%), linear-gradient(110deg, #F4E8C9, #FCF8EE 18%, #FCF8EE 88%, #E8D8B2); background-blend-mode: soft-light, multiply, multiply, normal, normal; border: 1px solid #D8C5A0; }
+    .book-page { position: relative; min-width: 0; overflow: hidden; padding: 24px clamp(12px, 2.4vw, 20px); background-color: #FCF8EE; background-image: var(--cotton-grain), repeating-linear-gradient(0deg, rgba(126, 87, 47, 0.01) 0 1px, transparent 1px 5px), repeating-linear-gradient(90deg, rgba(126, 87, 47, 0.007) 0 1px, transparent 1px 6px), radial-gradient(ellipse at 48% 48%, rgba(255, 255, 255, 0.42), transparent 70%), linear-gradient(110deg, #F4E8C9, #FCF8EE 18%, #FCF8EE 88%, #E8D8B2); background-blend-mode: soft-light, multiply, multiply, normal, normal; border: 1px solid #D8C5A0; }
     .left-page { border-radius: 9px 2px 2px 9px; box-shadow: -2px 0 0 #E8D9B9, -4px 1px 0 #CBB995, -6px 2px 0 #4A0E19, inset -18px 0 22px -20px rgba(42, 16, 22, 0.7); }
     .right-page { border-radius: 2px 9px 9px 2px; box-shadow: 2px 0 0 #E8D9B9, 4px 1px 0 #CBB995, 6px 2px 0 #4A0E19, inset 18px 0 22px -20px rgba(42, 16, 22, 0.7); }
     .open-book::after { content: ""; position: absolute; z-index: 3; pointer-events: none; top: 0; bottom: 0; left: 50%; width: 34px; transform: translateX(-50%); background: linear-gradient(90deg, transparent, rgba(42, 16, 22, 0.17) 26%, rgba(42, 16, 22, 0.07) 42%, rgba(255, 255, 255, 0.54) 50%, rgba(42, 16, 22, 0.09) 60%, rgba(42, 16, 22, 0.16) 76%, transparent); }
     .page-kicker { display: block; color: var(--burgundy-mid); font-size: 8px; font-weight: 600; letter-spacing: 0.13em; text-transform: uppercase; margin-bottom: 7px; }
     .page-title { display: block; font-family: var(--font-serif); font-size: clamp(17px, 1.9vw, 21px); line-height: 1.08; font-weight: 500; color: var(--burgundy-dark); margin-bottom: 7px; }
-    .journal-body { display: block; padding-bottom: 82px; color: var(--ink-muted); font-family: 'Caveat', cursive; font-size: 14px; line-height: 1.05; }
+    .journal-body { display: block; padding-bottom: 68px; color: var(--ink-muted); font-family: 'Caveat', cursive; font-size: 12.5px; line-height: 1.02; }
     .journal-body::after { content: ""; display: block; clear: both; }
-    .journal-copy { display: block; margin: 0 0 5px; }
+    .journal-copy { display: block; margin: 0 0 4px; }
     .journal-photo { position: relative; float: left; width: 40%; margin: 5px 12px 10px 2px; padding: 5px 5px 16px; background: #FFFEF8; border: 1px solid #8B755B; box-shadow: 0 3px 7px rgba(42, 16, 22, 0.2); transform: rotate(-2deg); }
     .journal-photo.photo-right { float: right; margin: 4px 2px 6px 10px; transform: rotate(2deg); }
-    .journal-photo img { display: block; width: 100%; height: 78px; object-fit: cover; filter: sepia(0.13) saturate(0.82) contrast(1.04); border: 1px solid rgba(74, 14, 25, 0.18); }
-    .journal-photo.memory-photo { position: absolute; z-index: 1; left: 30px; bottom: 42px; float: none; width: 76px; margin: 0; padding: 4px 4px 14px; transform: rotate(3deg); }
-    .journal-photo.memory-photo img { height: 46px; }
-    .page-face .journal-photo.memory-photo { left: 26px; bottom: 40px; width: 70px; }
-    .page-face .journal-photo.memory-photo img { height: 42px; }
+    .journal-photo img { display: block; width: 100%; height: 62px; object-fit: cover; filter: sepia(0.13) saturate(0.82) contrast(1.04); border: 1px solid rgba(74, 14, 25, 0.18); }
+    .journal-photo.memory-photo { position: absolute; z-index: 1; left: 24px; bottom: 30px; float: none; width: 64px; margin: 0; padding: 4px 4px 14px; transform: rotate(3deg); }
+    .journal-photo.memory-photo img { height: 36px; }
+    .page-face .journal-photo.memory-photo { left: 22px; bottom: 28px; width: 60px; }
+    .page-face .journal-photo.memory-photo img { height: 34px; }
     .journal-photo figcaption, .journal-photo .photo-caption { position: absolute; right: 4px; bottom: 2px; left: 4px; overflow: hidden; color: #70594B; font-family: var(--font-serif); font-size: 8px; font-style: italic; line-height: 1; text-align: center; white-space: nowrap; }
     .journal-photo::before { content: ""; position: absolute; z-index: 1; top: -5px; left: 23%; width: 25px; height: 7px; background: rgba(238, 208, 121, 0.82); box-shadow: 0 1px 2px rgba(42, 16, 22, 0.12); transform: rotate(-7deg); }
     .botanical-sticker { position: absolute; right: 16px; bottom: 42px; color: #7E1E31; opacity: 0.7; font-family: var(--font-serif); font-size: 23px; font-style: italic; transform: rotate(-18deg); }
@@ -277,10 +277,10 @@
     .book-leaf::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0; background: linear-gradient(90deg, rgba(42, 16, 22, 0.28), transparent 28%); transition: opacity 450ms ease; }
     .book-leaf.is-turned { transform: rotateY(-180deg); box-shadow: -6px 3px 5px rgba(42, 16, 22, 0.28); }
     .book-leaf.is-turned::after { opacity: 0.45; }
-    .page-face { position: absolute; inset: 0; padding: 26px clamp(14px, 2.4vw, 26px); overflow: hidden; backface-visibility: hidden; background-color: #FCF8EE; background-image: var(--cotton-grain), repeating-linear-gradient(0deg, rgba(126, 87, 47, 0.01) 0 1px, transparent 1px 5px), repeating-linear-gradient(90deg, rgba(126, 87, 47, 0.007) 0 1px, transparent 1px 6px), radial-gradient(ellipse at 48% 48%, rgba(255, 255, 255, 0.42), transparent 70%), linear-gradient(100deg, #E8D8B2, #FCF8EE 12%, #FCF8EE 88%, #F4E8C9); background-blend-mode: soft-light, multiply, multiply, normal, normal; border: 1px solid #D8C5A0; }
+    .page-face { position: absolute; inset: 0; padding: 24px clamp(12px, 2.4vw, 20px); overflow: hidden; backface-visibility: hidden; background-color: #FCF8EE; background-image: var(--cotton-grain), repeating-linear-gradient(0deg, rgba(126, 87, 47, 0.01) 0 1px, transparent 1px 5px), repeating-linear-gradient(90deg, rgba(126, 87, 47, 0.007) 0 1px, transparent 1px 6px), radial-gradient(ellipse at 48% 48%, rgba(255, 255, 255, 0.42), transparent 70%), linear-gradient(100deg, #E8D8B2, #FCF8EE 12%, #FCF8EE 88%, #F4E8C9); background-blend-mode: soft-light, multiply, multiply, normal, normal; border: 1px solid #D8C5A0; }
     .page-front { border-radius: 0 7px 7px 0; }
     .page-back { transform: rotateY(180deg); border-radius: 9px 2px 2px 9px; background-image: var(--cotton-grain), repeating-linear-gradient(0deg, rgba(126, 87, 47, 0.01) 0 1px, transparent 1px 5px), repeating-linear-gradient(90deg, rgba(126, 87, 47, 0.007) 0 1px, transparent 1px 6px), linear-gradient(260deg, #E8D8B2, #FCF8EE 12%, #FCF8EE 88%, #F4E8C9); background-blend-mode: soft-light, multiply, multiply, normal; }
-    .book-controls { display: flex; align-items: center; justify-content: space-between; gap: 16px; width: min(100%, 580px); margin: 12px auto 0; }
+    .book-controls { display: flex; align-items: center; justify-content: space-between; gap: 16px; width: min(100%, 460px); margin: 12px auto 0; }
     .book-status { color: var(--ink-muted); font-size: 13px; }
 
     .letter-preview { max-width: 580px; margin: 0 auto; }
@@ -333,17 +333,17 @@
     }
     @media (max-width: 560px) {
       .experience-stack { gap: 42px; }
-      .open-book { aspect-ratio: 9 / 10; }
-      .book-page, .page-face { padding: 18px 8px; }
-      .journal-body { padding-bottom: 6px; font-size: 11.5px; line-height: 1.03; }
+      .open-book { width: min(100%, 280px); aspect-ratio: 9 / 10; }
+      .book-page, .page-face { padding: 16px 7px; }
+      .journal-body { padding-bottom: 4px; font-size: 10.5px; line-height: 1.02; }
       .book-page .journal-copy.continuation:nth-of-type(n+3) { display: none; }
       .page-face .journal-copy.continuation:nth-of-type(n+4) { display: none; }
       .journal-photo { width: 43%; margin-right: 7px; }
-      .journal-photo img { height: 52px; }
-      .journal-photo.memory-photo { left: 14px; bottom: 28px; width: 56px; }
-      .journal-photo.memory-photo img { height: 32px; }
-      .page-face .journal-photo.memory-photo { left: 12px; bottom: 26px; width: 54px; }
-      .page-face .journal-photo.memory-photo img { height: 30px; }
+      .journal-photo img { height: 46px; }
+      .journal-photo.memory-photo { left: 12px; bottom: 20px; width: 50px; }
+      .journal-photo.memory-photo img { height: 28px; }
+      .page-face .journal-photo.memory-photo { left: 10px; bottom: 18px; width: 48px; }
+      .page-face .journal-photo.memory-photo img { height: 26px; }
       .journal-photo.photo-right { margin-left: 7px; }
       .letter-preview .letter-panel { height: auto; min-height: 240px; padding: 20px 22px; }
       .letter-preview .letter-note { font-size: 15px; }
@@ -453,10 +453,10 @@
                     <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&amp;fit=crop&amp;w=320&amp;q=75" alt="Misty mountains reflected in a quiet lake" loading="lazy" />
                     <figcaption>By the old lake · October</figcaption>
                   </figure>
-                  <p class="journal-copy">The afternoon turned silver with rain. We found the little path by the lake, pockets full of chestnuts, and watched clouds settle over the hills. I wish I could keep that hush here between these pages.</p>
-                  <p class="journal-copy continuation">Wet leaves and woodsmoke filled the air. We watched a heron lift from the water's edge and vanish into the mist.</p>
-                  <p class="journal-copy continuation">I tucked a copper leaf into my coat for the walk home. It rests here beside the date, a small promise to find this quiet again.</p>
-                  <p class="journal-copy continuation">By the old bridge, rain made rings on the water. Our sleeves were damp, our pockets full, and we were both smiling all the way home.</p>
+                  <p class="journal-copy">Rain silvered the path by the lake. We gathered chestnuts and watched clouds settle over the hills. I wanted to keep that hush here.</p>
+                  <p class="journal-copy continuation">Wet leaves and woodsmoke filled the air as a heron rose from the mist.</p>
+                  <p class="journal-copy continuation">I tucked a copper leaf beside the date—a little promise to find this quiet again.</p>
+                  <p class="journal-copy continuation">At the old bridge, rain made rings on the water. We walked home smiling.</p>
                 </div>
                 <figure class="journal-photo memory-photo">
                   <img src="https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&amp;fit=crop&amp;w=240&amp;q=70" alt="Last golden light across a quiet autumn field" loading="lazy" />
