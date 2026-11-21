@@ -532,7 +532,7 @@
               </div>
             </div>
             <div class="book-controls">
-              <span class="book-status" id="bookStatus" aria-live="polite">Pages 01–02 · Tap the page to turn it</span>
+              <span class="book-status" id="bookStatus" aria-live="polite">Click text to edit · Pages 01–02</span>
               <button type="button" class="btn-butter" id="cyclePageBtn">Turn Page →</button>
             </div>
           </div>
@@ -563,7 +563,7 @@
               </div>
             </div>
             <div class="letter-controls">
-              <span class="letter-hint" id="previewLetterHint" aria-live="polite">Click the sheet to unfold ↓</span>
+              <span class="letter-hint" id="previewLetterHint" aria-live="polite">Click text to edit · Unfold with button ↓</span>
               <button type="button" class="btn-butter" id="togglePreviewLetter" aria-expanded="false">Unfold Sheet ↓</button>
             </div>
           </div>
@@ -667,8 +667,8 @@
       const turned = pageLeaf.classList.toggle("is-turned");
       cyclePageBtn.textContent = turned ? "Turn Back ←" : "Turn Page →";
       bookStatus.textContent = turned
-        ? "Pages 03–04 · Tap the page to turn it back"
-        : "Pages 01–02 · Tap the page to turn it";
+        ? "Click text to edit · Pages 03–04"
+        : "Click text to edit · Pages 01–02";
     };
     pageLeaf.addEventListener("click", (event) => {
       if (isEditableTarget(event.target)) return;
@@ -683,7 +683,9 @@
       const unfolded = previewLetter.classList.toggle("unfolded");
       previewLetter.setAttribute("aria-expanded", String(unfolded));
       previewLetter.setAttribute("aria-label", unfolded ? "Fold the letter back up" : "Unfold the letter");
-      previewLetterHint.textContent = unfolded ? "Click the sheet to fold it back ↑" : "Click the sheet to unfold ↓";
+      previewLetterHint.textContent = unfolded
+        ? "Click text to edit · Fold with button ↑"
+        : "Click text to edit · Unfold with button ↓";
       togglePreviewLetter.setAttribute("aria-expanded", String(unfolded));
       togglePreviewLetter.textContent = unfolded ? "Fold Sheet ↑" : "Unfold Sheet ↓";
     };
