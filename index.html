@@ -306,6 +306,9 @@
     .letter-controls { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 14px; }
     .letter-hint { color: var(--ink-muted); font-size: 13px; }
     .book-leaf:focus-visible, .letter-sheet:focus-visible { outline: 3px solid #C8A549; outline-offset: 4px; }
+    [contenteditable="true"] { border-radius: 2px; caret-color: var(--burgundy-mid); cursor: text; transition: background-color 140ms ease; }
+    [contenteditable="true"]:hover, [contenteditable="true"]:focus { background-color: rgba(126, 30, 49, 0.045); }
+    [contenteditable="true"]:focus { outline: none; }
 
     .feature-badge { width: 34px; height: 34px; border-radius: 6px; background-color: var(--bg-butter-soft); border: 1px solid #D8BA68; color: var(--burgundy-dark); font-family: var(--font-serif); font-weight: 600; display: grid; place-items: center; margin-bottom: 14px; }
 
@@ -485,7 +488,7 @@
                 <div class="page-number">04</div>
                 <span class="botanical-sticker" aria-hidden="true">✳</span>
               </div>
-              <button type="button" class="book-leaf" id="pageLeaf" aria-label="Turn to the next page" aria-pressed="false">
+              <div class="book-leaf" id="pageLeaf" role="group" aria-label="Turnable scrapbook pages">
                 <span class="page-face page-front">
                   <span class="page-kicker">Collected moments · 02</span>
                   <span class="page-title">October afternoon</span>
@@ -526,7 +529,7 @@
                   <span class="page-number">03</span>
                   <span class="botanical-sticker" aria-hidden="true">✳</span>
                 </span>
-              </button>
+              </div>
             </div>
             <div class="book-controls">
               <span class="book-status" id="bookStatus" aria-live="polite">Pages 01–02 · Tap the page to turn it</span>
@@ -650,16 +653,27 @@
     const pageLeaf = document.getElementById("pageLeaf");
     const bookStatus = document.getElementById("bookStatus");
     const cyclePageBtn = document.getElementById("cyclePageBtn");
+    const editableBookText = ".page-kicker, .page-title, .journal-copy, .journal-photo figcaption, .journal-photo .photo-caption, .page-number";
+    document.querySelectorAll(`#experience .open-book ${editableBookText}`).forEach((element) => {
+      element.contentEditable = "true";
+      element.spellcheck = false;
+    });
+    document.querySelectorAll("#previewLetter .letter-tag, #previewLetter .letter-salutation, #previewLetter .letter-note").forEach((element) => {
+      element.contentEditable = "true";
+      element.spellcheck = false;
+    });
+    const isEditableTarget = (target) => target instanceof Element && target.closest('[contenteditable="true"]') !== null;
     const turnPage = () => {
       const turned = pageLeaf.classList.toggle("is-turned");
-      pageLeaf.setAttribute("aria-pressed", String(turned));
-      pageLeaf.setAttribute("aria-label", turned ? "Turn back to the previous page" : "Turn to the next page");
       cyclePageBtn.textContent = turned ? "Turn Back ←" : "Turn Page →";
       bookStatus.textContent = turned
         ? "Pages 03–04 · Tap the page to turn it back"
         : "Pages 01–02 · Tap the page to turn it";
     };
-    pageLeaf.addEventListener("click", turnPage);
+    pageLeaf.addEventListener("click", (event) => {
+      if (isEditableTarget(event.target)) return;
+      turnPage();
+    });
     cyclePageBtn.addEventListener("click", turnPage);
 
     const previewLetter = document.getElementById("previewLetter");
@@ -673,8 +687,12 @@
       togglePreviewLetter.setAttribute("aria-expanded", String(unfolded));
       togglePreviewLetter.textContent = unfolded ? "Fold Sheet ↑" : "Unfold Sheet ↓";
     };
-    previewLetter.addEventListener("click", toggleLetter);
+    previewLetter.addEventListener("click", (event) => {
+      if (isEditableTarget(event.target)) return;
+      toggleLetter();
+    });
     previewLetter.addEventListener("keydown", (event) => {
+      if (isEditableTarget(event.target)) return;
       if (event.key === "Enter" || event.key === " ") {
         event.preventDefault();
         toggleLetter();
