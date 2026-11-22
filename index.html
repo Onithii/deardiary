@@ -301,13 +301,17 @@
 
     .letter-preview { max-width: 580px; margin: 0 auto; }
     .letter-sheet { position: relative; perspective: 1400px; transform-style: preserve-3d; cursor: pointer; border: 1px solid #DEC47B; border-radius: 5px 4px 6px 3px; background-color: #F8EFCF; background-image: var(--cotton-grain), repeating-linear-gradient(0deg, rgba(126, 87, 47, 0.01) 0 1px, transparent 1px 8px), repeating-linear-gradient(90deg, rgba(126, 87, 47, 0.004) 0 1px, transparent 1px 9px), radial-gradient(ellipse at 50% 0%, rgba(255, 255, 255, 0.44), transparent 68%), radial-gradient(ellipse at 50% 50%, transparent 55%, rgba(117, 78, 40, 0.09) 100%), radial-gradient(ellipse at 0% 50%, rgba(117, 78, 40, 0.08), transparent 4%), radial-gradient(ellipse at 100% 50%, rgba(117, 78, 40, 0.08), transparent 4%), linear-gradient(180deg, #FDF6DF 0%, var(--paper-laid) 100%); background-blend-mode: soft-light, multiply, multiply, normal, multiply, multiply, multiply, normal; box-shadow: inset 0 0 10px rgba(117, 78, 40, 0.08), 0 8px 18px rgba(42, 16, 22, 0.1); }
-    .letter-preview .letter-panel { position: relative; height: 240px; padding: 22px clamp(22px, 4vw, 38px); border: 0; background: transparent; transform-style: preserve-3d; }
-    .letter-top { z-index: 3; border-radius: 4px 3px 0 0; }
-    .letter-body { display: grid; grid-template-rows: 0fr; transform-style: preserve-3d; transition: grid-template-rows 960ms cubic-bezier(0.22, 1, 0.36, 1); }
+    .letter-preview .letter-panel { position: relative; height: var(--letter-panel-height, 240px); padding: 22px clamp(22px, 4vw, 38px); border: 0; background: transparent; transform-style: preserve-3d; pointer-events: none; transition: height 320ms ease; }
+    .letter-top { z-index: 3; border-radius: 4px 3px 0 0; background-color: rgba(255, 255, 255, 0.035); }
+    .letter-body { display: grid; grid-template-rows: 0fr; transform-style: preserve-3d; transition: grid-template-rows 960ms cubic-bezier(0.22, 1, 0.36, 1); pointer-events: none; }
     .letter-body-inner { min-height: 0; overflow: visible; transform-style: preserve-3d; }
-    .letter-middle { z-index: 2; transform: rotateX(-180deg); transform-origin: top center; backface-visibility: hidden; transition: transform 650ms cubic-bezier(0.22, 1, 0.36, 1); transition-delay: 240ms; }
-    .letter-bottom { z-index: 1; transform: rotateX(-180deg); transform-origin: top center; backface-visibility: hidden; transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1); transition-delay: 0ms; border-radius: 0 0 5px 4px; }
+    .letter-middle { z-index: 2; background-color: rgba(248, 239, 207, 0.1); transform: rotateX(-180deg); transform-origin: top center; backface-visibility: hidden; transition: transform 650ms cubic-bezier(0.22, 1, 0.36, 1), height 320ms ease; transition-delay: 240ms; }
+    .letter-bottom { z-index: 1; background-color: rgba(248, 239, 207, 0.1); transform: rotateX(-180deg); transform-origin: top center; backface-visibility: hidden; transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1), height 320ms ease; transition-delay: 0ms; border-radius: 0 0 5px 4px; }
     .letter-middle::before, .letter-bottom::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 20px; pointer-events: none; opacity: 0.95; background: linear-gradient(180deg, rgba(74, 14, 25, 0.24), rgba(74, 14, 25, 0.08) 4px, rgba(255, 255, 255, 0.42) 9px, transparent 20px); transition: opacity 650ms ease; }
+    .letter-copy { position: absolute; z-index: 0; inset: 0; overflow: hidden; padding: 22px clamp(22px, 4vw, 38px); color: var(--burgundy-dark); font-family: 'Caveat', cursive; cursor: text; }
+    .letter-sheet.unfolded .letter-copy { overflow-y: auto; scrollbar-width: thin; }
+    #previewLetter .letter-copy:hover, #previewLetter .letter-copy:focus { background-color: transparent; }
+    .letter-copy p { position: relative; margin: 0 0 9px; font-size: 16.5px; line-height: 1.12; }
     .letter-sheet.unfolded .letter-body { grid-template-rows: 1fr; }
     .letter-sheet.unfolded .letter-middle, .letter-sheet.unfolded .letter-bottom { transform: rotateX(0); }
     .letter-sheet.unfolded .letter-middle { transition-delay: 0ms; }
@@ -315,7 +319,6 @@
     .letter-sheet.unfolded .letter-middle::before, .letter-sheet.unfolded .letter-bottom::before { opacity: 0.38; }
     .letter-tag { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--burgundy-mid); font-weight: 600; margin-bottom: 6px; }
     .letter-note { font-family: var(--font-serif); font-style: italic; font-size: 18px; line-height: 1.4; color: var(--burgundy-dark); }
-    .letter-preview .letter-note { margin: 0 0 9px; font-family: 'Caveat', cursive; font-size: 16.5px; line-height: 1.12; }
     .letter-preview .letter-salutation { margin: 0 0 6px; font-family: 'Caveat', cursive; font-size: 22px; line-height: 1.05; color: var(--burgundy-dark); }
     .letter-preview .letter-signoff { margin-top: 8px; font-size: 19px; line-height: 1.06; }
     .letter-preview .handwritten-signature { display: inline-block; margin-top: 2px; font-size: 26px; transform: rotate(-4deg); }
@@ -366,8 +369,9 @@
       .journal-body.crowded-photos .journal-photo img { height: 20px; }
       .journal-body.is-scrollable { scrollbar-width: thin; }
       .journal-photo.photo-right { margin-left: 7px; }
-      .letter-preview .letter-panel { height: auto; min-height: 240px; padding: 20px 22px; }
-      .letter-preview .letter-note { font-size: 15px; }
+      .letter-preview .letter-panel { height: var(--letter-panel-height, 240px); padding: 20px 22px; }
+      .letter-copy { padding: 20px 22px; }
+      .letter-copy p { margin-bottom: 6px; font-size: 14px; line-height: 1.04; }
       .letter-preview .letter-salutation { font-size: 21px; }
       .book-controls, .letter-controls { align-items: flex-start; flex-direction: column; }
     }
@@ -560,24 +564,27 @@
           <h3>A Letter</h3>
           <p>A warm sheet of laid paper unfolds downward, panel by panel—no envelope.</p>
           <div class="letter-preview">
-            <div class="letter-sheet" id="previewLetter" role="button" tabindex="0" aria-expanded="false" aria-label="Unfold the letter">
-              <div class="letter-panel letter-top">
-                <div class="letter-tag">Folded Sheet · No Envelope</div>
-                <div class="letter-salutation">My dearest,</div>
-                <p class="letter-note">I have been thinking of that slow Sunday afternoon, when the rain softened the windows and we let the tea grow cold while we talked. It felt as though the world had given us a little extra time.</p>
-                <p class="letter-note">I remember the way you laughed at the story in the old book, and how the golden light moved slowly across the table while the kettle sang.</p>
-              </div>
-              <div class="letter-body">
+            <div class="letter-sheet" id="previewLetter" role="group" aria-expanded="false" aria-label="Editable letter preview">
+              <div class="letter-panel letter-top" aria-hidden="true"></div>
+              <div class="letter-body" aria-hidden="true">
                 <div class="letter-body-inner">
-                  <div class="letter-panel letter-middle">
-                    <p class="letter-note">I keep returning to the small things: your coat by the door, the leaves pressed between the pages, and the quiet that settled around us when the rain began. They were ordinary moments, perhaps, but they have become some of my most treasured ones.</p>
-                    <p class="letter-note">I hope the coming days bring you gentle mornings, a favorite song at just the right time, and somewhere peaceful to rest whenever you need it.</p>
-                  </div>
-                  <div class="letter-panel letter-bottom">
-                    <p class="letter-note">Until we meet again, know that you are remembered with such fondness. I am saving this little piece of our autumn here, so we can find our way back to it whenever we wish.</p>
-                    <p class="letter-note letter-signoff">With all my love,<br />Always yours,<br /><span class="handwritten-signature">Mara</span></p>
-                  </div>
+                  <div class="letter-panel letter-middle" aria-hidden="true"></div>
+                  <div class="letter-panel letter-bottom" aria-hidden="true"></div>
                 </div>
+              </div>
+              <div class="letter-copy" contenteditable="true" spellcheck="false" role="textbox" aria-multiline="true" aria-label="Letter text">
+                <div class="letter-tag">Folded Sheet · No Envelope</div>
+                <p class="letter-salutation">My dearest,</p>
+                <p>I have been thinking of that slow Sunday afternoon, when the rain softened the windows and we let the tea grow cold while we talked. It felt as though the world had given us a little extra time.</p>
+                <p>I remember the way you laughed at the story in the old book, and how the golden light moved slowly across the table while the kettle sang.</p>
+                <p>I keep returning to the small things: your coat by the door, the leaves pressed between the pages, and the quiet that settled around us when the rain began. They were ordinary moments, perhaps, but they have become some of my most treasured ones.</p>
+                <p>I hope the coming days bring you gentle mornings, a favorite song at just the right time, and somewhere peaceful to rest whenever you need it.</p>
+                <p>I have carried that quiet afternoon with me ever since—the gold on the table, rain tapping softly at the window, and the comfort of having nowhere else to be. It is a small memory, but it has stayed bright.</p>
+                <p>Thank you for making an ordinary day feel worth keeping. I hope we find more hours like it: unhurried walks, warm cups, stories we already know by heart, and the easy quiet of being together.</p>
+                <p>I keep a place for these small memories: the damp cuffs of our coats, the last warmth in the teapot, and the way the room grew quiet when the rain finally stopped. They remind me that a day does not need to be extraordinary to become precious.</p>
+                <p>Perhaps that is what I love most about being with you: there is no need to fill every silence. A shared glance, a familiar story, and the soft light at the window are more than enough to make me feel at home.</p>
+                <p>Until we meet again, know that you are remembered with such fondness. I am saving this little piece of our autumn here, so we can find our way back to it whenever we wish.</p>
+                <p class="letter-signoff">With all my love,<br />Always yours,<br /><span class="handwritten-signature">Mara</span></p>
               </div>
             </div>
             <div class="letter-controls">
@@ -673,10 +680,6 @@
     const cyclePageBtn = document.getElementById("cyclePageBtn");
     const editableBookText = ".page-kicker, .page-title, .journal-copy, .journal-photo figcaption, .journal-photo .photo-caption, .page-number";
     document.querySelectorAll(`#experience .open-book ${editableBookText}`).forEach((element) => {
-      element.contentEditable = "true";
-      element.spellcheck = false;
-    });
-    document.querySelectorAll("#previewLetter .letter-tag, #previewLetter .letter-salutation, #previewLetter .letter-note").forEach((element) => {
       element.contentEditable = "true";
       element.spellcheck = false;
     });
@@ -848,8 +851,24 @@
     const previewLetter = document.getElementById("previewLetter");
     const previewLetterHint = document.getElementById("previewLetterHint");
     const togglePreviewLetter = document.getElementById("togglePreviewLetter");
+    const letterCopy = previewLetter.querySelector(".letter-copy");
+    const resizeLetterPanels = () => {
+      const range = document.createRange();
+      range.selectNodeContents(letterCopy);
+      const contentBottom = range.getBoundingClientRect().bottom - letterCopy.getBoundingClientRect().top + letterCopy.scrollTop;
+      const paddingBottom = parseFloat(getComputedStyle(letterCopy).paddingBottom);
+      const panelHeight = Math.max(240, Math.ceil((contentBottom + paddingBottom) / 3));
+      previewLetter.style.setProperty("--letter-panel-height", `${panelHeight}px`);
+    };
+    letterCopy.addEventListener("input", () => {
+      if (previewLetter.classList.contains("unfolded")) resizeLetterPanels();
+    });
+    window.addEventListener("resize", () => {
+      if (previewLetter.classList.contains("unfolded")) window.requestAnimationFrame(resizeLetterPanels);
+    });
     const toggleLetter = () => {
       const unfolded = previewLetter.classList.toggle("unfolded");
+      if (unfolded) window.requestAnimationFrame(resizeLetterPanels);
       previewLetter.setAttribute("aria-expanded", String(unfolded));
       previewLetter.setAttribute("aria-label", unfolded ? "Fold the letter back up" : "Unfold the letter");
       previewLetterHint.textContent = unfolded
